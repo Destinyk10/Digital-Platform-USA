@@ -52,19 +52,50 @@ fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether
   <h2>Your Crypto Trading Partner</h2>
   <p>Buy & Trade Bitcoin in the USA</p>
 
-  <div style="background:#111; padding:20px; border-radius:12px; margin:20px;">
-    <h3 style="color:#4da3ff; margin:0 0 10px 0;">Live USD Calculator</h3>
-    <input id="usdInput" type="number" placeholder="Enter USD amount" 
-           style="padding:12px; width:85%; border:none; border-radius:8px; font-size:16px; text-align:center;">
-    <p style="margin:15px 0 5px 0;">You get: <strong id="ngnOutput" style="color:#4da3ff; font-size:18px;">₦0</strong></p>
-    <small style="color:#888;">Rate: ₦1,650 per $1</small>
+    <div style="background:#111; padding:20px; border-radius:12px; margin:20px;">
+    <h3 style="color:#4da3ff; margin:0 0 10px 0;">Live Currency Calculator</h3>
+    
+    <select id="currencySelect" style="padding:12px; width:85%; margin-bottom:10px; border-radius:8px; border:none; background:#222; color:#fff; font-size:16px;">
+      <option value="usd">🇺🇸 USD → NGN</option>
+      <option value="gbp">🇬🇧 GBP → NGN</option>
+      <option value="eur">🇪🇺 EUR → NGN</option>
+      <option value="cad">🇨🇦 CAD → NGN</option>
+    </select>
+    
+    <input id="currencyInput" type="number" placeholder="Enter USD amount" 
+           style="padding:12px; width:85%; margin-bottom:10px; border-radius:8px; border:none; text-align:center; font-size:16px;">
+    
+    <p style="margin:0; font-size:20px; color:#4da3ff; font-weight:bold;">
+      <span id="ngnOutput">₦0</span>
+    </p>
+    <p style="margin:8px 0 0 0; font-size:13px; color:#888;" id="rateText">Rate: ₦1,650 / $1</p>
   </div>
+
   <script>
-    const RATE = 1650;
-    document.getElementById('usdInput').addEventListener('input', e => {
-      let usd = parseFloat(e.target.value) || 0;
-      document.getElementById('ngnOutput').innerText = '₦' + (usd * RATE).toLocaleString();
-    });
+    const RATES = {usd: 1650, gbp: 2100, eur: 1800, cad: 1200};
+    const SYMBOLS = {usd: '$', gbp: '£', eur: '€', cad: 'C$'};
+    const NAMES = {usd: 'USD', gbp: 'GBP', eur: 'EUR', cad: 'CAD'};
+    
+    const currencySelect = document.getElementById('currencySelect');
+    const currencyInput = document.getElementById('currencyInput');
+    const ngnOutput = document.getElementById('ngnOutput');
+    const rateText = document.getElementById('rateText');
+    
+    function updateCalc() {
+      let currency = currencySelect.value;
+      let amount = parseFloat(currencyInput.value) || 0;
+      let rate = RATES[currency];
+      let symbol = SYMBOLS[currency];
+      let name = NAMES[currency];
+      
+      ngnOutput.innerText = `₦${(amount * rate).toLocaleString()}`;
+      rateText.innerText = `Rate: ₦${rate.toLocaleString()} / ${symbol}1`;
+      currencyInput.placeholder = `Enter ${name} amount`;
+    }
+    
+    currencySelect.addEventListener('change', updateCalc);
+    currencyInput.addEventListener('input', updateCalc);
+    updateCalc();
   </script>
 
   <div style="background:#111; padding:20px; border-radius:12px; margin:20px;">
