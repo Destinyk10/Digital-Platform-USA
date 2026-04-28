@@ -42,16 +42,50 @@
     </style>
 </head>
 <body>
+    <div id="btc-ticker" style="background:#1a1a1a; color:#ff9800; padding:10px; font-weight:bold; border-radius:8px; margin-bottom:20px;">
+  Loading BTC Price...
+</div>
+<script>
+fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd')
+  .then(r=>r.json())
+  .then(d=>{
+    document.getElementById('btc-ticker').innerHTML = `₿ BTC/USD: $${d.bitcoin.usd.toLocaleString()}`;
+  })
+  .catch(e=>{document.getElementById('btc-ticker').innerHTML = 'BTC Price Unavailable'})
+</script>
     <h1>Digital Platform USA</h1>
     <img src="hero.jpg" class="hero" alt="Bitcoin NYC">
     <h2>Your Crypto Trading Partner</h2>
     <p>Buy & Trade Bitcoin in the USA</p>
-    
-    <a href="https://wa.me/qr/LOQ7A26VJ2DFF1" 
-       style="position:fixed;bottom:20px;right:20px;background:#25D366;color:white;padding:15px 25px;border-radius:50px;text-decoration:none;font-weight:bold;z-index:9999;box-shadow:0 4px 12px rgba(0,0,0,0.3);font-family:sans-serif;"
-       target="_blank">
-       💬 Chat on WhatsApp
-    </a>
-    
+    <div style="background:#111; padding:20px; border-radius:12px; margin:20px auto; max-width:400px;">
+  <h3 style="color:#4da3ff; margin:0 0 10px 0;">Live Calculator</h3>
+  <input id="usdInput" type="number" placeholder="Enter USD Amount" 
+         style="padding:12px; width:85%; border:none; border-radius:8px; text-align:center; font-size:16px; margin:5px;">
+  <p style="margin:15px 0 5px 0;">You get: <strong style="color:#ff9800; font-size:1.4rem;">₦<span id="ngnOutput">0</span></strong></p>
+  <small style="color:#888;">Rate: ₦1,650 per $1</small>
+</div>
+  </div>
+</script>
+
+<div style="background:#111; padding:20px; border-radius:12px; margin:20px auto; max-width:400px;">
+  <h3 style="color:#4da3ff; margin:0 0 10px 0;">Start Your Order</h3>
+  <input id="clientName" placeholder="Your Name" 
+         style="padding:12px; width:85%; margin:5px; border:none; border-radius:8px;">
+  <input id="buyAmount" type="number" placeholder="Amount in USD" 
+         style="padding:12px; width:85%; margin:5px; border:none; border-radius:8px;">
+  <button onclick="sendOrder()" 
+          style="background:#25D366; color:white; padding:14px 30px; border:none; border-radius:25px; font-size:16px; margin-top:10px; width:90%; cursor:pointer; font-weight:bold;">
+    💬 Order on WhatsApp
+  </button>
+</div>
+<script>
+function sendOrder(){
+  let name = document.getElementById('clientName').value || 'Client';
+  let amount = document.getElementById('buyAmount').value || '0';
+  let text = `Hi Digital Platform USA, I'm ${name}. I want to buy $${amount} worth of BTC. What's your current rate?`;
+  window.open(`https://wa.me/qr/LOQ7A26VJ2DFF1?text=${encodeURIComponent(text)}`, '_blank');
+}
+</script>
+
 </body>
 </html>
