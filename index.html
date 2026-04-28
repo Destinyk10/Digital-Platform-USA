@@ -42,42 +42,51 @@
     </style>
 </head>
 <body>
-    <div id="btc-ticker" style="background:#1a1a1a; color:#ff9800; padding:10px; font-weight:bold; border-radius:8px; margin-bottom:20px;">
+
+<div id="btc-ticker" style="background:#1a1a1a; color:#ff9800; padding:12px; font-weight:bold; text-align:center; margin:0 20px 20px 20px; border-radius:8px;">
   Loading BTC Price...
 </div>
 <script>
 fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd')
-  .then(r=>r.json())
-  .then(d=>{
-    document.getElementById('btc-ticker').innerHTML = `₿ BTC/USD: $${d.bitcoin.usd.toLocaleString()}`;
-  })
-  .catch(e=>{document.getElementById('btc-ticker').innerHTML = 'BTC Price Unavailable'})
-</script>
-    <h1>Digital Platform USA</h1>
-    <img src="hero.jpg" class="hero" alt="Bitcoin NYC">
-    <h2>Your Crypto Trading Partner</h2>
-    <p>Buy & Trade Bitcoin in the USA</p>
-    <div style="background:#111; padding:20px; border-radius:12px; margin:20px auto; max-width:400px;">
-  <h3 style="color:#4da3ff; margin:0 0 10px 0;">Live Calculator</h3>
-  <input id="usdInput" type="number" placeholder="Enter USD Amount" 
-         style="padding:12px; width:85%; border:none; border-radius:8px; text-align:center; font-size:16px; margin:5px;">
-  <p style="margin:15px 0 5px 0;">You get: <strong style="color:#ff9800; font-size:1.4rem;">₦<span id="ngnOutput">0</span></strong></p>
-  <small style="color:#888;">Rate: ₦1,650 per $1</small>
-</div>
-  </div>
+.then(r=>r.json())
+.then(d=>{
+  document.getElementById('btc-ticker').innerHTML = `₿ BTC/USD: $${d.bitcoin.usd.toLocaleString()}`;
+});
 </script>
 
-<div style="background:#111; padding:20px; border-radius:12px; margin:20px auto; max-width:400px;">
-  <h3 style="color:#4da3ff; margin:0 0 10px 0;">Start Your Order</h3>
-  <input id="clientName" placeholder="Your Name" 
-         style="padding:12px; width:85%; margin:5px; border:none; border-radius:8px;">
-  <input id="buyAmount" type="number" placeholder="Amount in USD" 
-         style="padding:12px; width:85%; margin:5px; border:none; border-radius:8px;">
-  <button onclick="sendOrder()" 
-          style="background:#25D366; color:white; padding:14px 30px; border:none; border-radius:25px; font-size:16px; margin-top:10px; width:90%; cursor:pointer; font-weight:bold;">
-    💬 Order on WhatsApp
-  </button>
-</div>
+<div style="max-width:500px; margin:auto;">
+  <h1>Digital Platform USA</h1>
+  <img src="hero.jpg" class="hero" alt="Bitcoin NYC">
+  <h2>Your Crypto Trading Partner</h2>
+  <p>Buy & Trade Bitcoin in the USA</p>
+
+  <div style="background:#111; padding:20px; border-radius:12px; margin:20px auto; max-width:400px;">
+    <h3 style="color:#4da3ff; margin:0 0 10px 0;">Live Calculator</h3>
+    <input id="usdInput" type="number" placeholder="Enter USD Amount" 
+           style="padding:12px; width:85%; border:none; border-radius:8px; text-align:center; font-size:16px; margin:5px;">
+    <p style="margin:15px 0 5px 0;">You get: <strong style="color:#ff9800; font-size:1.4rem;">₦<span id="ngnOutput">0</span></strong></p>
+    <small style="color:#888;">Rate: ₦1,650 per $1</small>
+  </div>
+  <script>
+  const RATE = 1650;
+  document.getElementById('usdInput').addEventListener('input', function(e) {
+    let usd = parseFloat(e.target.value) || 0;
+    document.getElementById('ngnOutput').innerText = (usd * RATE).toLocaleString();
+  });
+  </script>
+
+  <div style="background:#111; padding:20px; border-radius:12px; margin:20px auto; max-width:400px;">
+    <h3 style="color:#4da3ff; margin:0 0 10px 0;">Start Your Order</h3>
+    <input id="clientName" placeholder="Your Name" 
+           style="padding:12px; width:85%; margin:5px; border:none; border-radius:8px;">
+    <input id="buyAmount" type="number" placeholder="Amount in USD" 
+           style="padding:12px; width:85%; margin:5px; border:none; border-radius:8px;">
+    <button onclick="sendOrder()"
+            style="background:#25D366; color:white; padding:14px; width:90%; border:none; border-radius:8px; font-weight:bold; margin-top:10px; font-size:16px;">
+      💬 Order on WhatsApp
+    </button>
+  </div>
+
 <script>
 function sendOrder(){
   let name = document.getElementById('clientName').value || 'Client';
