@@ -43,14 +43,15 @@
 </head>
 <body>
 
-<div id="btc-ticker" style="background:#1a1a1a; color:#ff9800; padding:12px; font-weight:bold; text-align:center; margin:0 20px 20px 20px; border-radius:8px;">
-  Loading BTC Price...
+<div id="crypto-ticker" style="background:#1a1a1a; color:#ff9800; padding:12px; font-weight:bold; text-align:center; margin:0 20px 20px 20px; border-radius:8px; font-size:13px;">
+  Loading Prices...
 </div>
 <script>
-fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd')
+fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether&vs_currencies=usd')
 .then(r=>r.json())
 .then(d=>{
-  document.getElementById('btc-ticker').innerHTML = `₿ BTC/USD: $${d.bitcoin.usd.toLocaleString()}`;
+  document.getElementById('crypto-ticker').innerHTML = 
+    `₿ BTC: $${d.bitcoin.usd.toLocaleString()} | Ξ ETH: $${d.ethereum.usd.toLocaleString()} | ₮ USDT: $${d.tether.usd}`;
 });
 </script>
 
