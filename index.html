@@ -53,38 +53,52 @@ fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether
   <p>Buy & Trade Bitcoin in the USA</p>
 
     <div style="background:#111; padding:20px; border-radius:12px; margin:20px;">
-    <h3 style="color:#4da3ff; margin:0 0 10px 0;">Live Currency Calculator</h3>
+  <div style="background:#111; padding:20px; border-radius:12px; margin:20px;">
+    <h3 style="color:#4da3ff; margin:0 0 10px 0;">BTC Calculator</h3>
     
     <select id="currencySelect" style="padding:12px; width:85%; margin-bottom:10px; border-radius:8px; border:none; background:#222; color:#fff; font-size:16px;">
-      <option value="usd">🇺🇸 USD → NGN</option>
-      <option value="gbp">🇬🇧 GBP → NGN</option>
-      <option value="eur">🇪🇺 EUR → NGN</option>
-      <option value="cad">🇨🇦 CAD → NGN</option>
+      <option value="usd">🇺🇸 USD → BTC</option>
+      <option value="gbp">🇬🇧 GBP → BTC</option>
+      <option value="eur">🇪🇺 EUR → BTC</option>
+      <option value="cad">🇨🇦 CAD → BTC</option>
     </select>
     
     <input id="currencyInput" type="number" placeholder="Enter USD amount" 
            style="padding:12px; width:85%; margin-bottom:10px; border-radius:8px; border:none; text-align:center; font-size:16px;">
     
-    <p style="margin:0; font-size:20px; color:#4da3ff; font-weight:bold;">
-      <span id="ngnOutput">₦0</span>
+    <p style="margin:0; font-size:20px; color:#ff9800; font-weight:bold;">
+      <span id="btcOutput">₿0.00000000</span>
     </p>
-    <p style="margin:8px 0 0 0; font-size:13px; color:#888;" id="rateText">Rate: ₦1,650 / $1</p>
+    <p style="margin:8px 0 0 0; font-size:13px; color:#888;" id="rateText">1 BTC = $43,250</p>
   </div>
 
   <script>
-    const RATES = {usd: 1650, gbp: 2100, eur: 1800, cad: 1200};
+    const BTC_RATES = {usd: 43250, gbp: 34200, eur: 39800, cad: 58800};
     const SYMBOLS = {usd: '$', gbp: '£', eur: '€', cad: 'C$'};
     const NAMES = {usd: 'USD', gbp: 'GBP', eur: 'EUR', cad: 'CAD'};
     
     const currencySelect = document.getElementById('currencySelect');
     const currencyInput = document.getElementById('currencyInput');
-    const ngnOutput = document.getElementById('ngnOutput');
+    const btcOutput = document.getElementById('btcOutput');
     const rateText = document.getElementById('rateText');
     
     function updateCalc() {
       let currency = currencySelect.value;
       let amount = parseFloat(currencyInput.value) || 0;
-      let rate = RATES[currency];
+      let btcPrice = BTC_RATES[currency];
+      let symbol = SYMBOLS[currency];
+      let name = NAMES[currency];
+      
+      let btcAmount = amount / btcPrice;
+      btcOutput.innerText = `₿${btcAmount.toFixed(8)}`;
+      rateText.innerText = `1 BTC = ${symbol}${btcPrice.toLocaleString()}`;
+      currencyInput.placeholder = `Enter ${name} amount`;
+    }
+    
+    currencySelect.addEventListener('change', updateCalc);
+    currencyInput.addEventListener('input', updateCalc);
+    updateCalc();
+  </script>
       let symbol = SYMBOLS[currency];
       let name = NAMES[currency];
       
