@@ -128,6 +128,95 @@ fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether
       <p style="margin:8px 0 0 0; color:#ff9800; font-size:13px; font-weight:bold;">— Michael T. Benin City</p>
     </div>
   </div>
+
+<!-- FAQ Section -->
+<div style="background:#111; padding:25px 20px; border-radius:12px; margin:30px 0; color:#fff; font-family:Arial, sans-serif; max-width:500px; margin-left:auto; margin-right:auto;">
+  <h3 style="margin:0 0 20px 0; color:#4da3ff; text-align:center; font-size:22px;">Frequently Asked Questions</h3>
+  
+  <div class="faq-item" style="border-bottom:1px solid #333; padding:15px 0;">
+    <div onclick="toggleFaq(this)" style="display:flex; justify-content:space-between; align-items:center; cursor:pointer; font-weight:bold; font-size:16px;">
+      How long does it take to receive my BTC? <span style="color:#4da3ff; font-size:20px;">+</span>
+    </div>
+    <div style="max-height:0; overflow:hidden; transition:max-height 0.3s ease; color:#ccc; font-size:14px; line-height:1.6; padding-top:0;">
+      <p style="margin:10px 0 0 0;">Usually 5-15 minutes after we confirm your payment. During high network traffic it can take up to 30 minutes. You'll get transaction proof on WhatsApp immediately.</p>
+    </div>
+  </div>
+  
+  <div class="faq-item" style="border-bottom:1px solid #333; padding:15px 0;">
+    <div onclick="toggleFaq(this)" style="display:flex; justify-content:space-between; align-items:center; cursor:pointer; font-weight:bold; font-size:16px;">
+      Is this safe? How do I know you're legit? <span style="color:#4da3ff; font-size:20px;">+</span>
+    </div>
+    <div style="max-height:0; overflow:hidden; transition:max-height 0.3s ease; color:#ccc; font-size:14px; line-height:1.6; padding-top:0;">
+      <p style="margin:10px 0 0 0;">We've completed 1000+ trades since 2022. Check our testimonials above. We send BTC first for new clients under $500. You can also request a video call before paying.</p>
+    </div>
+  </div>
+  
+  <div class="faq-item" style="border-bottom:1px solid #333; padding:15px 0;">
+    <div onclick="toggleFaq(this)" style="display:flex; justify-content:space-between; align-items:center; cursor:pointer; font-weight:bold; font-size:16px;">
+      What payment methods do you accept? <span style="color:#4da3ff; font-size:20px;">+</span>
+    </div>
+    <div style="max-height:0; overflow:hidden; transition:max-height 0.3s ease; color:#ccc; font-size:14px; line-height:1.6; padding-top:0;">
+      <p style="margin:10px 0 0 0;">Bank Transfer, Opay, Palmpay, Kuda, USDT. For USD/GBP/EUR we accept Wise, PayPal F&F, and international wire. Message us on WhatsApp for details.</p>
+    </div>
+  </div>
+  
+  <div class="faq-item" style="padding:15px 0;">
+    <div onclick="toggleFaq(this)" style="display:flex; justify-content:space-between; align-items:center; cursor:pointer; font-weight:bold; font-size:16px;">
+      What is your minimum and maximum order? <span style="color:#4da3ff; font-size:20px;">+</span>
+    </div>
+    <div style="max-height:0; overflow:hidden; transition:max-height 0.3s ease; color:#ccc; font-size:14px; line-height:1.6; padding-top:0;">
+      <p style="margin:10px 0 0 0;">Minimum: $50 or ₦50,000. Maximum: $50,000 per transaction. For larger orders, contact us on WhatsApp for OTC rates.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+function toggleFaq(element) {
+  const content = element.nextElementSibling;
+  const icon = element.querySelector('span');
+  
+  if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+    content.style.maxHeight = '0px';
+    content.style.paddingTop = '0px';
+    icon.innerText = '+';
+  } else {
+    content.style.maxHeight = content.scrollHeight + 'px';
+    content.style.paddingTop = '10px';
+    icon.innerText = '−';
+  }
+}
+</script>
+    <div style="max-height:0; overflow:hidden; transition:max-height 0.3s ease; color:#ccc; font-size:14px; line-height:1.6; padding-top:0;">
+      <p style="margin:10px 0 0 0;">Bank Transfer, Opay, Palmpay, Kuda, USDT. For USD/GBP/EUR we accept Wise, PayPal F&F, and international wire. Message us on WhatsApp for details.</p>
+    </div>
+  </div>
+  
+  <div class="faq-item" style="padding:15px 0;">
+    <div onclick="toggleFaq(this)" style="display:flex; justify-content:space-between; align-items:center; cursor:pointer; font-weight:bold; font-size:16px;">
+      What is your minimum and maximum order? <span style="color:#4da3ff; font-size:20px;">+</span>
+    </div>
+    <div style="max-height:0; overflow:hidden; transition:max-height 0.3s ease; color:#ccc; font-size:14px; line-height:1.6; padding-top:0;">
+      <p style="margin:10px 0 0 0;">Minimum: $50 or ₦50,000. Maximum: $50,000 per transaction. For larger orders, contact us on WhatsApp for OTC rates.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+function toggleFaq(element) {
+  const content = element.nextElementSibling;
+  const icon = element.querySelector('span');
+  
+  if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+    content.style.maxHeight = '0px';
+    content.style.paddingTop = '0px';
+    icon.innerText = '+';
+  } else {
+    content.style.maxHeight = content.scrollHeight + 'px';
+    content.style.paddingTop = '10px';
+    icon.innerText = '−';
+  }
+}
+</script>
   <div style="background:#111; padding:20px; border-radius:12px; margin:20px;">
     <h3 style="color:#4da3ff; margin:0 0 10px 0;">Order Instantly</h3>
     <input id="clientName" placeholder="Your Name" 
