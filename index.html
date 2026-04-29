@@ -71,33 +71,43 @@ fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether
     </p>
     <p style="margin:8px 0 0 0; font-size:13px; color:#888;" id="rateText">1 BTC = $43,250</p>
   </div>
-  <script>
-    const BTC_RATES = {usd: 43250, gbp: 34200, eur: 39800, cad: 58800};
-    const SYMBOLS = {usd: '$', gbp: '£', eur: '€', cad: 'C$'};
-    const NAMES = {usd: 'USD', gbp: 'GBP', eur: 'EUR', cad: 'CAD'};
-    
-    const currencySelect = document.getElementById('currencySelect');
-    const currencyInput = document.getElementById('currencyInput');
-    const btcOutput = document.getElementById('btcOutput');
-    const rateText = document.getElementById('rateText');
-    
-    function updateCalc() {
-      let currency = currencySelect.value;
-      let amount = parseFloat(currencyInput.value) || 0;
-      let btcPrice = BTC_RATES[currency];
-      let symbol = SYMBOLS[currency];
-      let name = NAMES[currency];
-      
-      let btcAmount = amount / btcPrice;
-      btcOutput.innerText = `₿${btcAmount.toFixed(8)}`;
-      rateText.innerText = `1 BTC = ${symbol}${btcPrice.toLocaleString()}`;
-      currencyInput.placeholder = `Enter ${name} amount`;
+  <script><script>
+  let BTC_RATES = {usd: 43250, gbp: 34200, eur: 39800, cad: 58800};
+  const SYMBOLS = {usd: '$', gbp: '£', eur: '€', cad: 'C$'};
+  
+  const currencySelect = document.getElementById('currencySelect');
+  const currencyInput = document.getElementById('currencyInput');
+  const btcOutput = document.getElementById('btcOutput');
+  const rateText = document.getElementById('rateText');
+  
+  async function fetchLiveRates() {
+    try {
+      const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd,gbp,eur,cad');
+      const data = await res.json();
+      BTC_RATES = data.bitcoin;
+      updateCalc();
+    } catch(e) { 
+      console.log('Using backup rates'); 
     }
+  }
+  
+  function updateCalc() {
+    let currency = currencySelect.value;
+    let amount = parseFloat(currencyInput.value) || 0;
+    let btcPrice = BTC_RATES[currency];
+    let symbol = SYMBOLS[currency];
     
-    currencySelect.addEventListener('change', updateCalc);
-    currencyInput.addEventListener('input', updateCalc);
-    updateCalc();
-  </script>
+    let btcAmount = amount / btcPrice;
+    btcOutput.innerText = `₿${btcAmount.toFixed(8)}`;
+    rateText.innerText = `1 BTC = ${symbol}${btcPrice.toLocaleString()} • Live`;
+  }
+  
+  currencySelect.addEventListener('change', updateCalc);
+  currencyInput.addEventListener('input', updateCalc);
+  updateCalc();
+  fetchLiveRates();
+  setInterval(fetchLiveRates, 60000);
+</script>
   
 
   <div style="background:#111; padding:20px; border-radius:12px; margin:20px;">
