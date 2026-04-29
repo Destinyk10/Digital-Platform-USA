@@ -80,11 +80,14 @@ fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether
   const btcOutput = document.getElementById('btcOutput');
   const rateText = document.getElementById('rateText');
   
+    let timeLeft = 300; // 5 minutes in seconds
+  
   async function fetchLiveRates() {
     try {
       const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd,gbp,eur,cad');
       const data = await res.json();
       BTC_RATES = data.bitcoin;
+      timeLeft = 300; // Reset timer when new rate loads
       updateCalc();
     } catch(e) { 
       console.log('Using backup rates'); 
@@ -102,11 +105,23 @@ fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether
     rateText.innerText = `1 BTC = ${symbol}${btcPrice.toLocaleString()} • Live`;
   }
   
+  function updateTimer() {
+    const minutes = Math.floor(timeLeft / 60);
+    const seconds = timeLeft % 60;
+    document.getElementById('expiryTimer').innerText = `Rate expires in ${minutes}:${seconds.toString().padStart(2, '0')}`;
+    
+    if (timeLeft <= 0) {
+      fetchLiveRates(); // Get new rate when timer hits 0
+    } else {
+      timeLeft--;
+    }
+  }
+  
   currencySelect.addEventListener('change', updateCalc);
   currencyInput.addEventListener('input', updateCalc);
   updateCalc();
   fetchLiveRates();
-  setInterval(fetchLiveRates, 60000);
+  setInterval(updateTimer, 1000); // Countdown every second
 </script>
   
 
