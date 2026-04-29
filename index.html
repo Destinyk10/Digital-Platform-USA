@@ -97,19 +97,8 @@ fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether
     currencySelect.addEventListener('change', updateCalc);
     currencyInput.addEventListener('input', updateCalc);
     updateCalc();
-  </script>
-      let symbol = SYMBOLS[currency];
-      let name = NAMES[currency];
-      
-      ngnOutput.innerText = `₦${(amount * rate).toLocaleString()}`;
-      rateText.innerText = `Rate: ₦${rate.toLocaleString()} / ${symbol}1`;
-      currencyInput.placeholder = `Enter ${name} amount`;
-    }
-    
-    currencySelect.addEventListener('change', updateCalc);
-    currencyInput.addEventListener('input', updateCalc);
-    updateCalc();
-  </script>
+  
+  
 
   <div style="background:#111; padding:20px; border-radius:12px; margin:20px;">
     <h3 style="color:#4da3ff; margin:0 0 15px 0;">What Clients Say</h3>
