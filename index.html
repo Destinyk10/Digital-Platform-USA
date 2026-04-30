@@ -279,59 +279,49 @@ if(usdBox) {
 }
 
 // Run once on load
-runCalc();
-</script>
-
-    // DYNAMIC QR CODE
-    const qrSection = document.getElementById('qrSection');
-    const qrAmount = document.getElementById('qrAmount');
-    if (amount > 0 && qrSection) {
+function runCalc() {
+  const usdBox = document.querySelector('input[type="number"]');
+  const btcOutput = document.querySelector('div[style*="color: rgb(255"]'); // The orange ₿ text
+  const qrSection = document.getElementById('qrSection');
+  const qrAmount = document.getElementById('qrAmount');
+  const qrCanvas = document.getElementById('qrCanvas');
+  
+  const usd = parseFloat(usdBox.value) || 0;
+  const BTC_RATE = 76393;
+  const btc = usd / BTC_RATE;
+  
+  // Update calculator display
+  if (btcOutput) {
+    btcOutput.textContent = `₿${btc.toFixed(8)}`;
+  }
+  
+  // Update QR code
+  if (qrSection) {
+    if (usd > 0) {
       qrSection.style.display = 'block';
       const btcAddress = 'bc1q6n3femsfdl7td2jewccz4pwhfmaxcfx8x09z0q';
-      const paymentURI = `bitcoin:${btcAddress}?amount=${cryptoAmount.toFixed(8)}`;
-      QRCode.toCanvas(document.getElementById('qrCanvas'), paymentURI, {
+      const paymentURI = `bitcoin:${btcAddress}?amount=${btc.toFixed(8)}`;
+      
+      QRCode.toCanvas(qrCanvas, paymentURI, {
         width: 180,
         margin: 1,
-        color: { dark: '#000000', light: '#ffffff' }
+        color: { dark: '#000000', light: '#FFFFFF' }
       });
-      qrAmount.textContent = `Send: ₿${cryptoAmount.toFixed(8)}`;
-    } else if (qrSection) {
+      
+      qrAmount.textContent = `Send: ₿${btc.toFixed(8)}`;
+    } else {
       qrSection.style.display = 'none';
     }
-
-  } else if (currentCoin === 'USDT') {
-    cryptoAmount = amount * rate;
-    displayText = `${cryptoAmount.toFixed(2)} USDT`;
-    const qrSection = document.getElementById('qrSection');
-    if (qrSection) qrSection.style.display = 'none';
-  } else if (currentCoin === 'ETH') {
-    cryptoAmount = amount / rate;
-    displayText = `${cryptoAmount.toFixed(6)} ETH`;
-    const qrSection = document.getElementById('qrSection');
-    if (qrSection) qrSection.style.display = 'none';
   }
-
-  btcOutput.textContent = displayText;
-  rateText.textContent = `1 ${currentCoin} = ${symbol}${rate.toLocaleString()} • Live`;
 }
 
-// === TIMER ===
-function updateTimer() {
-  timeLeft--;
-  if(timeLeft <= 0) {
-    fetchLiveRates();
-    return;
+// Hook up the input
+document.addEventListener('DOMContentLoaded', function() {
+  const usdBox = document.querySelector('input[type="number"]');
+  if (usdBox) {
+    usdBox.addEventListener('input', runCalc);
   }
-  let mins = Math.floor(timeLeft / 60);
-  let secs = timeLeft % 60;
-  expiryTimer.innerText = `Rate expires in ${mins}:${secs.toString().padStart(2,'0')}`;
-}
-
-// === START ===
-currencySelect.addEventListener('change', updateCalc);
-currencyInput.addEventListener('input', updateCalc);
-fetchLiveRates();
-setInterval(updateTimer, 1000);
-</script>
+  runCalc(); // Run once on load
+});
 </body>
 </html>
