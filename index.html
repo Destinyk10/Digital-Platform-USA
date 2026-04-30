@@ -129,13 +129,6 @@ fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether
   setInterval(updateTimer, 1000); // Updates countdown every second
 </script>
   
-  currencySelect.addEventListener('change', updateCalc);
-  currencyInput.addEventListener('input', updateCalc);
-  updateCalc();
-  fetchLiveRates();
-  setInterval(updateTimer, 1000); // Countdown every second
-</script>
-  
 
   <div style="background:#111; padding:20px; border-radius:12px; margin:20px;">
     <h3 style="color:#4da3ff; margin:0 0 15px 0;">What Clients Say</h3>
@@ -268,3 +261,4 @@ function sendOrder(){
 
 </body>
 </html>
+</script>
