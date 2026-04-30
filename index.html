@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js
+ <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script> <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Digital Platform USA - Buy Bitcoin Instantly</title>
@@ -283,20 +282,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
   
-  if (!usdInput || !btcOutput) return;
   
-  const usd = parseFloat(usdInput.value) || 0;
-  const btc = usd / BTC_RATE;
-  
-  // Update calculator
-  btcOutput.textContent = `₿${btc.toFixed(8)}`;
-  
-  // Update QR
-  if (qrSection) {
-    if (usd >= 10) {
-      qrSection.style.display = 'block';
-      QRCode.toCanvas(document.getElementById('qrCanvas'), 
-        `bitcoin:${BTC_ADDRESS}?amount=${btc.toFixed(8)}`, 
         { width: 200, margin: 1 }
       );
       document.getElementById('qrAmount').textContent = `Send: ₿${btc.toFixed(8)}`;
