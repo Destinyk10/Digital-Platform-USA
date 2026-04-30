@@ -290,38 +290,37 @@ function runCalc() {
   const BTC_RATE = 76393;
   const btc = usd / BTC_RATE;
   
-  // Update calculator display
-  if (btcOutput) {
-    btcOutput.textContent = `₿${btc.toFixed(8)}`;
-  }
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+<script>
+const BTC_ADDRESS = 'bc1q6n3femsfdl7td2jewccz4pwhfmaxcfx8x09z0q';
+
+function updateAll() {
+  const usd = parseFloat(document.getElementById('usdInput').value) || 0;
+  const BTC_RATE = 43250; // matches your "1 BTC = $43,250"
+  const btc = usd / BTC_RATE;
   
-  // Update QR code
-  if (qrSection) {
-    if (usd > 0) {
-      qrSection.style.display = 'block';
-      const btcAddress = 'bc1q6n3femsfdl7td2jewccz4pwhfmaxcfx8x09z0q';
-      const paymentURI = `bitcoin:${btcAddress}?amount=${btc.toFixed(8)}`;
-      
-      QRCode.toCanvas(qrCanvas, paymentURI, {
-        width: 180,
-        margin: 1,
-        color: { dark: '#000000', light: '#FFFFFF' }
-      });
-      
-      qrAmount.textContent = `Send: ₿${btc.toFixed(8)}`;
-    } else {
-      qrSection.style.display = 'none';
-    }
+  // 1. Update calculator text
+  document.getElementById('btcResult').textContent = `₿${btc.toFixed(8)}`;
+  
+  // 2. Update QR code
+  const qrSection = document.getElementById('qrSection');
+  if (usd >= 10) {
+    qrSection.style.display = 'block';
+    QRCode.toCanvas(document.getElementById('qrCanvas'), 
+      `bitcoin:${BTC_ADDRESS}?amount=${btc.toFixed(8)}`, 
+      { width: 200, margin: 1 }
+    );
+    document.getElementById('qrAmount').textContent = `Send: ₿${btc.toFixed(8)}`;
+  } else {
+    qrSection.style.display = 'none';
   }
 }
 
-// Hook up the input
-document.addEventListener('DOMContentLoaded', function() {
-  const usdBox = document.querySelector('input[type="number"]');
-  if (usdBox) {
-    usdBox.addEventListener('input', runCalc);
-  }
-  runCalc(); // Run once on load
-});
+// Run when user types
+document.getElementById('usdInput').addEventListener('input', updateAll);
+
+// Run once when page loads
+document.addEventListener('DOMContentLoaded', updateAll);
+</script>
 </body>
 </html>
