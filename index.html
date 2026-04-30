@@ -103,17 +103,19 @@ function switchCoin(coin) {
   
       let timeLeft = 300; // 5 minutes
   
-  async function fetchLiveRates() {
-    try {
-      const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd,gbp,eur,cad');
-      const data = await res.json();
-      BTC_RATES = data.bitcoin;
-      timeLeft = 300; // Reset timer on new rate
-      updateCalc();
-    } catch(e) { 
-      console.log('Using backup rates'); 
-    }
+ async function fetchLiveRates() {
+  try {
+    const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,tether,ethereum&vs_currencies=usd,gbp,eur,cad');
+    const data = await res.json();
+    COIN_RATES.BTC = data.bitcoin;
+    COIN_RATES.USDT = data.tether;
+    COIN_RATES.ETH = data.ethereum;
+    timeLeft = 300; // Reset timer on new rate
+    updateCalc();
+  } catch(e) {
+    console.log('Using backup rates');
   }
+}
   
  function updateCalc() {
   let currency = currencySelect.value;
