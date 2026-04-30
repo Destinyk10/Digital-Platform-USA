@@ -115,16 +115,23 @@ function switchCoin(coin) {
     }
   }
   
-  function updateCalc() {
-    let currency = currencySelect.value;
-    let amount = parseFloat(currencyInput.value) || 0;
-    let btcPrice = BTC_RATES[currency];
-    let symbol = SYMBOLS[currency];
-    
-    let btcAmount = amount / btcPrice;
-    btcOutput.innerText = `₿${btcAmount.toFixed(8)}`;
-    rateText.innerText = `1 BTC = ${symbol}${btcPrice.toLocaleString()} • Live`;
-  }
+ function updateCalc() {
+  let currency = currencySelect.value;
+  let amount = parseFloat(currencyInput.value) || 0;
+  
+  // Use COIN_RATES instead of BTC_RATES
+  let price = COIN_RATES[currentCoin][currency];
+  let symbol = SYMBOLS[currency];
+  
+  let coinAmount = amount / price;
+  
+  // Show correct format for each coin
+  if(currentCoin==='BTC') btcOutput.innerText = `₿${coinAmount.toFixed(8)}`;
+  else if(currentCoin==='USDT') btcOutput.innerText = `${coinAmount.toFixed(2)} USDT`;
+  else if(currentCoin==='ETH') btcOutput.innerText = `${coinAmount.toFixed(6)} ETH`;
+  
+  rateText.innerText = `1 ${currentCoin} = ${symbol}${price.toLocaleString()} • Live`;
+}}
   
   function updateTimer() {
     const minutes = Math.floor(timeLeft / 60);
