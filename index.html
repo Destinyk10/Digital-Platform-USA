@@ -198,7 +198,17 @@ function toggleFaq(element) {
     </button>
   </div>
 </div>
-
+<!-- DYNAMIC QR CODE SECTION -->
+<div id="qrSection" style="text-align: center; margin: 30px 0; display: none; background: rgba(59, 130, 246, 0.1); padding: 20px; border-radius: 16px; border: 1px solid rgba(59, 130, 246, 0.3);">
+  <h3 style="color: #3b82f6; margin-bottom: 12px; font-size: 18px;">Scan to Pay BTC</h3>
+  <canvas id="qrCanvas" style="border-radius: 12px; background: white; padding: 8px;"></canvas>
+  <p id="qrAmount" style="color: #fff; font-size: 16px; font-weight: 600; margin-top: 12px;"></p>
+  <p style="color: #888; font-size: 11px; margin-top: 4px; word-break: break-all;">bc1q6n3femsfdl7td2jewccz4pwhfmaxcfx8x09z0q</p>
+  <button onclick="navigator.clipboard.writeText('bc1q6n3femsfdl7td2jewccz4pwhfmaxcfx8x09z0q');this.textContent='Copied!'"
+          style="background: #3b82f6; color: white; border: none; padding: 10px 20px; border-radius: 8px; margin-top: 8px; cursor: pointer; font-weight: 600;">
+    Copy Address
+  </button>
+</div>
 <script>
 function sendOrder(){
   let name = document.getElementById('clientName').value;
