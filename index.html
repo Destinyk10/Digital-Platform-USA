@@ -62,13 +62,34 @@ fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether
       <option value="eur">🇪🇺 EUR → BTC</option>
       <option value="cad">🇨🇦 CAD → BTC</option>
     </select>
-    
+    <div style="display:flex; gap:8px; margin-bottom:15px; justify-content:center;">
+  <button id="btnBTC" onclick="switchCoin('BTC')" style="background:#4da3ff; color:#000; border:none; padding:10px 16px; border-radius:6px; font-weight:700;">BTC</button>
+  <button id="btnUSDT" onclick="switchCoin('USDT')" style="background:#1a1a1a; color:#fff; border:none; padding:10px 16px; border-radius:6px; font-weight:700;">USDT</button>
+  <button id="btnETH" onclick="switchCoin('ETH')" style="background:#1a1a1a; color:#fff; border:none; padding:10px 16px; border-radius:6px; font-weight:700;">ETH</button>
+</div>
     <input id="currencyInput" type="number" placeholder="Enter USD amount" 
            style="padding:12px; width:85%; margin-bottom:10px; border-radius:8px; border:none; text-align:center; font-size:16px;">
     
     <p style="margin:0; font-size:20px; color:#ff9800; font-weight:bold;">
       <span id="btcOutput">₿0.00000000</span>
-    </p>
+    let currentCoin = 'BTC';
+let COIN_RATES = {
+  BTC: {usd: 76271, gbp: 60200, eur: 70800, cad: 103500},
+  USDT: {usd: 1, gbp: 0.79, eur: 0.92, cad: 1.36},
+  ETH: {usd: 3400, gbp: 2680, eur: 3150, cad: 4620}
+};
+const SYMBOLS = {usd: '$', gbp: '£', eur: '€', cad: '$'};
+
+function switchCoin(coin) {
+  currentCoin = coin;
+  document.getElementById('btnBTC').style.background = coin==='BTC' ? '#4da3ff' : '#1a1a1a';
+  document.getElementById('btnBTC').style.color = coin==='BTC' ? '#000' : '#fff';
+  document.getElementById('btnUSDT').style.background = coin==='USDT' ? '#4da3ff' : '#1a1a1a';
+  document.getElementById('btnUSDT').style.color = coin==='USDT' ? '#000' : '#fff';
+  document.getElementById('btnETH').style.background = coin==='ETH' ? '#4da3ff' : '#1a1a1a';
+  document.getElementById('btnETH').style.color = coin==='ETH' ? '#000' : '#fff';
+  updateCalc();
+}
     <p style="margin:8px 0 0 0; font-size:13px; color:#888;" id="rateText">1 BTC = $43,250</p><div id="expiryTimer" style="font-size:11px; color:#ff9800; margin-top:5px; text-align:center;">Rate expires in 5:00</div>
     </p>
   <script>
