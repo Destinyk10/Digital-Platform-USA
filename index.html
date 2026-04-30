@@ -1,4 +1,4 @@
-I<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
 <head>
@@ -254,18 +254,49 @@ async function fetchLiveRates() {
 
 // === CALCULATOR ===
 function updateCalc() {
-  let currency = currencySelect.value;
-  let amount = parseFloat(currencyInput.value) || 0;
-  let price = COIN_RATES[currentCoin][currency];
-  let symbol = SYMBOLS[currency];
-  
-  let coinAmount = amount / price;
-  
-  if(currentCoin==='BTC') btcOutput.innerText = `₿${coinAmount.toFixed(8)}`;
-  else if(currentCoin==='USDT') btcOutput.innerText = `${coinAmount.toFixed(2)} USDT`;
-  else if(currentCoin==='ETH') btcOutput.innerText = `${coinAmount.toFixed(6)} ETH`;
-  
-  rateText.innerText = `1 ${currentCoin} = ${symbol}${price.toLocaleString()} • Live`;
+  const currency = currencySelect.value;
+  const amount = parseFloat(currencyInput.value) || 0;
+  const rate = COIN_RATES[currentCoin][currency];
+  const symbol = SYMBOLS[currency];
+
+  let cryptoAmount = 0;
+  let displayText = '';
+
+  if (currentCoin === 'BTC') {
+    cryptoAmount = amount / rate;
+    displayText = `₿${cryptoAmount.toFixed(8)}`;
+
+    // DYNAMIC QR CODE
+    const qrSection = document.getElementById('qrSection');
+    const qrAmount = document.getElementById('qrAmount');
+    if (amount > 0 && qrSection) {
+      qrSection.style.display = 'block';
+      const btcAddress = 'bc1q6n3femsfdl7td2jewccz4pwhfmaxcfx8x09z0q';
+      const paymentURI = `bitcoin:${btcAddress}?amount=${cryptoAmount.toFixed(8)}`;
+      QRCode.toCanvas(document.getElementById('qrCanvas'), paymentURI, {
+        width: 180,
+        margin: 1,
+        color: { dark: '#000000', light: '#ffffff' }
+      });
+      qrAmount.textContent = `Send: ₿${cryptoAmount.toFixed(8)}`;
+    } else if (qrSection) {
+      qrSection.style.display = 'none';
+    }
+
+  } else if (currentCoin === 'USDT') {
+    cryptoAmount = amount * rate;
+    displayText = `${cryptoAmount.toFixed(2)} USDT`;
+    const qrSection = document.getElementById('qrSection');
+    if (qrSection) qrSection.style.display = 'none';
+  } else if (currentCoin === 'ETH') {
+    cryptoAmount = amount / rate;
+    displayText = `${cryptoAmount.toFixed(6)} ETH`;
+    const qrSection = document.getElementById('qrSection');
+    if (qrSection) qrSection.style.display = 'none';
+  }
+
+  btcOutput.textContent = displayText;
+  rateText.textContent = `1 ${currentCoin} = ${symbol}${rate.toLocaleString()} • Live`;
 }
 
 // === TIMER ===
@@ -288,4 +319,3 @@ setInterval(updateTimer, 1000);
 </script>
 </body>
 </html>
-</script>
