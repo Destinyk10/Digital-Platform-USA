@@ -72,105 +72,10 @@ fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether
     
     <p style="margin:0; font-size:20px; color:#ff9800; font-weight:bold;">
       <span id="btcOutput">₿0.00000000</span>
-   <script> let currentCoin = 'BTC';
-let COIN_RATES = {
-  BTC: {usd: 76271, gbp: 60200, eur: 70800, cad: 103500},
-  USDT: {usd: 1, gbp: 0.79, eur: 0.92, cad: 1.36},
-  ETH: {usd: 3400, gbp: 2680, eur: 3150, cad: 4620}
-};
-const SYMBOLS = {usd: '$', gbp: '£', eur: '€', cad: '$'};
 
-function switchCoin(coin) {
-  currentCoin = coin;
-  document.getElementById('btnBTC').style.background = coin==='BTC' ? '#4da3ff' : '#1a1a1a';
-  document.getElementById('btnBTC').style.color = coin==='BTC' ? '#000' : '#fff';
-  document.getElementById('btnUSDT').style.background = coin==='USDT' ? '#4da3ff' : '#1a1a1a';
-  document.getElementById('btnUSDT').style.color = coin==='USDT' ? '#000' : '#fff';
-  document.getElementById('btnETH').style.background = coin==='ETH' ? '#4da3ff' : '#1a1a1a';
-  document.getElementById('btnETH').style.color = coin==='ETH' ? '#000' : '#fff';
-  updateCalc();
-}
     <p style="margin:8px 0 0 0; font-size:13px; color:#888;" id="rateText">1 BTC = $43,250</p><div id="expiryTimer" style="font-size:11px; color:#ff9800; margin-top:5px; text-align:center;">Rate expires in 5:00</div>
     </p>
-<script>
-// === SETUP - MUST BE FIRST ===
-let currentCoin = 'BTC';
-let COIN_RATES = {
-  BTC: {usd: 76271, gbp: 60200, eur: 70800, cad: 103500},
-  USDT: {usd: 1, gbp: 0.79, eur: 0.92, cad: 1.36},
-  ETH: {usd: 3400, gbp: 2680, eur: 3150, cad: 4620}
-};
-const SYMBOLS = {usd: '$', gbp: '£', eur: '€', cad: '$'};
-let timeLeft = 300;
 
-const currencySelect = document.getElementById('currencySelect');
-const currencyInput = document.getElementById('currencyInput');
-const btcOutput = document.getElementById('btcOutput');
-const rateText = document.getElementById('rateText');
-const expiryTimer = document.getElementById('expiryTimer');
-
-// === SWITCH COIN ===
-function switchCoin(coin) {
-  currentCoin = coin;
-  document.getElementById('btnBTC').style.background = coin==='BTC'? '#4da3ff' : '#1a1a1a';
-  document.getElementById('btnBTC').style.color = coin==='BTC'? '#000' : '#fff';
-  document.getElementById('btnUSDT').style.background = coin==='USDT'? '#4da3ff' : '#1a1a1a';
-  document.getElementById('btnUSDT').style.color = coin==='USDT'? '#000' : '#fff';
-  document.getElementById('btnETH').style.background = coin==='ETH'? '#4da3ff' : '#1a1a1a';
-  document.getElementById('btnETH').style.color = coin==='ETH'? '#000' : '#fff';
-  updateCalc();
-}
-
-// === LIVE API RATES ===
-async function fetchLiveRates() {
-  try {
-    const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,tether,ethereum&vs_currencies=usd,gbp,eur,cad');
-    const data = await res.json();
-    COIN_RATES.BTC = data.bitcoin;
-    COIN_RATES.USDT = data.tether;
-    COIN_RATES.ETH = data.ethereum;
-    timeLeft = 300;
-    updateCalc();
-  } catch(e) {
-    console.log('Using backup rates');
-    updateCalc();
-  }
-}
-
-// === CALCULATOR ===
-function updateCalc() {
-  let currency = currencySelect.value;
-  let amount = parseFloat(currencyInput.value) || 0;
-  let price = COIN_RATES[currentCoin][currency];
-  let symbol = SYMBOLS[currency];
-  
-  let coinAmount = amount / price;
-  
-  if(currentCoin==='BTC') btcOutput.innerText = `₿${coinAmount.toFixed(8)}`;
-  else if(currentCoin==='USDT') btcOutput.innerText = `${coinAmount.toFixed(2)} USDT`;
-  else if(currentCoin==='ETH') btcOutput.innerText = `${coinAmount.toFixed(6)} ETH`;
-  
-  rateText.innerText = `1 ${currentCoin} = ${symbol}${price.toLocaleString()} • Live`;
-}
-
-// === TIMER ===
-function updateTimer() {
-  timeLeft--;
-  if(timeLeft <= 0) {
-    fetchLiveRates();
-    return;
-  }
-  let mins = Math.floor(timeLeft / 60);
-  let secs = timeLeft % 60;
-  expiryTimer.innerText = `Rate expires in ${mins}:${secs.toString().padStart(2,'0')}`;
-}
-
-// === START ===
-currencySelect.addEventListener('change', updateCalc);
-currencyInput.addEventListener('input', updateCalc);
-fetchLiveRates();
-setInterval(updateTimer, 1000);
-</script>
   
 
   <div style="background:#111; padding:20px; border-radius:12px; margin:20px;">
@@ -301,7 +206,85 @@ function sendOrder(){
   window.open(`https://wa.me/qr/LOQ7A26VJ2DFF1?text=${encodeURIComponent(text)}`, '_blank');
 }
 </script>
+<script>
+// === SETUP - MUST BE FIRST ===
+let currentCoin = 'BTC';
+let COIN_RATES = {
+  BTC: {usd: 76271, gbp: 60200, eur: 70800, cad: 103500},
+  USDT: {usd: 1, gbp: 0.79, eur: 0.92, cad: 1.36},
+  ETH: {usd: 3400, gbp: 2680, eur: 3150, cad: 4620}
+};
+const SYMBOLS = {usd: '$', gbp: '£', eur: '€', cad: '$'};
+let timeLeft = 300;
 
+const currencySelect = document.getElementById('currencySelect');
+const currencyInput = document.getElementById('currencyInput');
+const btcOutput = document.getElementById('btcOutput');
+const rateText = document.getElementById('rateText');
+const expiryTimer = document.getElementById('expiryTimer');
+
+// === SWITCH COIN ===
+function switchCoin(coin) {
+  currentCoin = coin;
+  document.getElementById('btnBTC').style.background = coin==='BTC'? '#4da3ff' : '#1a1a1a';
+  document.getElementById('btnBTC').style.color = coin==='BTC'? '#000' : '#fff';
+  document.getElementById('btnUSDT').style.background = coin==='USDT'? '#4da3ff' : '#1a1a1a';
+  document.getElementById('btnUSDT').style.color = coin==='USDT'? '#000' : '#fff';
+  document.getElementById('btnETH').style.background = coin==='ETH'? '#4da3ff' : '#1a1a1a';
+  document.getElementById('btnETH').style.color = coin==='ETH'? '#000' : '#fff';
+  updateCalc();
+}
+
+// === LIVE API RATES ===
+async function fetchLiveRates() {
+  try {
+    const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,tether,ethereum&vs_currencies=usd,gbp,eur,cad');
+    const data = await res.json();
+    COIN_RATES.BTC = data.bitcoin;
+    COIN_RATES.USDT = data.tether;
+    COIN_RATES.ETH = data.ethereum;
+    timeLeft = 300;
+    updateCalc();
+  } catch(e) {
+    console.log('Using backup rates');
+    updateCalc();
+  }
+}
+
+// === CALCULATOR ===
+function updateCalc() {
+  let currency = currencySelect.value;
+  let amount = parseFloat(currencyInput.value) || 0;
+  let price = COIN_RATES[currentCoin][currency];
+  let symbol = SYMBOLS[currency];
+  
+  let coinAmount = amount / price;
+  
+  if(currentCoin==='BTC') btcOutput.innerText = `₿${coinAmount.toFixed(8)}`;
+  else if(currentCoin==='USDT') btcOutput.innerText = `${coinAmount.toFixed(2)} USDT`;
+  else if(currentCoin==='ETH') btcOutput.innerText = `${coinAmount.toFixed(6)} ETH`;
+  
+  rateText.innerText = `1 ${currentCoin} = ${symbol}${price.toLocaleString()} • Live`;
+}
+
+// === TIMER ===
+function updateTimer() {
+  timeLeft--;
+  if(timeLeft <= 0) {
+    fetchLiveRates();
+    return;
+  }
+  let mins = Math.floor(timeLeft / 60);
+  let secs = timeLeft % 60;
+  expiryTimer.innerText = `Rate expires in ${mins}:${secs.toString().padStart(2,'0')}`;
+}
+
+// === START ===
+currencySelect.addEventListener('change', updateCalc);
+currencyInput.addEventListener('input', updateCalc);
+fetchLiveRates();
+setInterval(updateTimer, 1000);
+</script>
 </body>
 </html>
 </script>
