@@ -262,19 +262,36 @@ async function fetchLiveRates() {
   }
 }
 
-// === CALCULATOR ===
-function updateCalc() {
-  const currency = 'usd'; // since your input is USD Amount
-const amount = parseFloat(document.getElementById('buyAmount').value) || 0;
-  const rate = COIN_RATES[currentCoin][currency];
-  const symbol = SYMBOLS[currency];
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+<script>
+// RATES - Update these manually
+const BTC_RATE = 76393;
 
-  let cryptoAmount = 0;
-  let displayText = '';
+// FIND ELEMENTS
+const usdBox = document.querySelector('input[placeholder="100"]') || document.querySelector('input[type="number"]');
+const btcDisplay = document.querySelector('div').innerText.includes('₿') ? document.querySelector('div') : null;
 
-  if (currentCoin === 'BTC') {
-    cryptoAmount = amount / rate;
-    displayText = `₿${cryptoAmount.toFixed(8)}`;
+// CALCULATOR FIX
+function runCalc() {
+  const usd = parseFloat(usdBox.value) || 0;
+  const btc = usd / BTC_RATE;
+  
+  // Find the ₿0.00000000 text and replace it
+  const btcText = document.querySelector('div[style*="color: rgb(255"]') || document.querySelector('div').nextElementSibling;
+  if(btcText && btcText.textContent.includes('₿')) {
+    btcText.textContent = `₿${btc.toFixed(8)}`;
+  }
+}
+
+// Run on every keystroke
+if(usdBox) {
+  usdBox.addEventListener('input', runCalc);
+  usdBox.addEventListener('change', runCalc);
+}
+
+// Run once on load
+runCalc();
+</script>
 
     // DYNAMIC QR CODE
     const qrSection = document.getElementById('qrSection');
