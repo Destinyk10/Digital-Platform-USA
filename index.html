@@ -185,7 +185,6 @@ function toggleFaq(element) {
     content.style.paddingTop = '10px';
     icon.innerText = '−';
   }
-}
 </script>
   <div style="background:#111; padding:20px; border-radius:12px; margin:20px;">
     <h3 style="color:#4da3ff; margin:0 0 10px 0;">Order Instantly</h3>
@@ -198,7 +197,11 @@ function toggleFaq(element) {
       💬 Order on WhatsApp
     </button>
   </div>
-
+<!-- QR Code for Order Form -->
+<div id="qrSection" style="display:none; text-align:center; margin:20px 0;">
+  <canvas id="qrCanvas"></canvas>
+  <p id="qrAmount" style="margin-top:8px; font-weight:bold; color:#fff;"></p>
+</div>
 <script>
 function sendOrder(){
   let name = document.getElementById('clientName').value;
