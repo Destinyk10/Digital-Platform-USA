@@ -254,20 +254,15 @@ async function fetchLiveRates() {
     updateCalc();
   }
 }
-
-<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
-<script>
+  
 // RATES - Update these manually
-const BTC_RATE = 76393;
-
-// FIND ELEMENTS
 const BTC_RATE = 43250;
 const BTC_ADDRESS = 'bc1q6n3femsfdl7td2jewccz4pwhfmaxcfx8x09z0q';
 
 // ONE function to rule them all
 function updateCalculator() {
   const usdInput = document.querySelector('.calculator input[type="number"]');
-  const btcOutput = document.querySelector('.calculator div[style*="rgb(255"]') || document.querySelector('#calcResult');
+  const btcOutput = document.querySelector('.calculator div[style*="rgb(255"]');
   
   if (!usdInput || !btcOutput) {
     console.log('Calculator elements not found');
@@ -287,14 +282,6 @@ document.addEventListener('DOMContentLoaded', function() {
     updateCalculator(); // Run once on load
   }
 });
-});
-const BTC_ADDRESS = 'bc1q6n3femsfdl7td2jewccz4pwhfmaxcfx8x09z0q';
-const BTC_RATE = 43250; // Using $43,250 to match your UI
-
-function updateCalc() {
-  const usdInput = document.querySelector('.calculator input[type="number"]');
-  const btcOutput = document.querySelector('div[style*="color: rgb(255"]');
-  const qrSection = document.getElementById('qrSection');
   
   if (!usdInput || !btcOutput) return;
   
