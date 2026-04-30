@@ -261,27 +261,33 @@ async function fetchLiveRates() {
 const BTC_RATE = 76393;
 
 // FIND ELEMENTS
-const usdBox = document.querySelector('input[placeholder="100"]') || document.querySelector('input[type="number"]');
-const btcDisplay = document.querySelector('div').innerText.includes('₿') ? document.querySelector('div') : null;
+const BTC_RATE = 43250;
+const BTC_ADDRESS = 'bc1q6n3femsfdl7td2jewccz4pwhfmaxcfx8x09z0q';
 
-// CALCULATOR FIX
-function runCalc() {
-  const usd = parseFloat(usdBox.value) || 0;
-  const btc = usd / BTC_RATE;
+// ONE function to rule them all
+function updateCalculator() {
+  const usdInput = document.querySelector('.calculator input[type="number"]');
+  const btcOutput = document.querySelector('.calculator div[style*="rgb(255"]') || document.querySelector('#calcResult');
   
-  // Find the ₿0.00000000 text and replace it
-  const btcText = document.querySelector('div[style*="color: rgb(255"]') || document.querySelector('div').nextElementSibling;
-  if(btcText && btcText.textContent.includes('₿')) {
-    btcText.textContent = `₿${btc.toFixed(8)}`;
+  if (!usdInput || !btcOutput) {
+    console.log('Calculator elements not found');
+    return;
   }
+  
+  const usd = parseFloat(usdInput.value) || 0;
+  const btc = usd / BTC_RATE;
+  btcOutput.textContent = `₿${btc.toFixed(8)}`;
 }
 
-// Run on every keystroke
-if(usdBox) {
-  usdBox.addEventListener('input', runCalc);
-  usdBox.addEventListener('change', runCalc);
-}
-<script>
+// Hook it up once page loads
+document.addEventListener('DOMContentLoaded', function() {
+  const usdInput = document.querySelector('.calculator input[type="number"]');
+  if (usdInput) {
+    usdInput.addEventListener('input', updateCalculator);
+    updateCalculator(); // Run once on load
+  }
+});
+});
 const BTC_ADDRESS = 'bc1q6n3femsfdl7td2jewccz4pwhfmaxcfx8x09z0q';
 const BTC_RATE = 43250; // Using $43,250 to match your UI
 
