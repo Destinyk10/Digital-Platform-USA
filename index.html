@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Digital Platform USA - Buy Bitcoin Instantly</title>
@@ -277,50 +278,45 @@ if(usdBox) {
   usdBox.addEventListener('input', runCalc);
   usdBox.addEventListener('change', runCalc);
 }
-
-// Run once on load
-function runCalc() {
-  const usdBox = document.querySelector('input[type="number"]');
-  const btcOutput = document.querySelector('div[style*="color: rgb(255"]'); // The orange ₿ text
-  const qrSection = document.getElementById('qrSection');
-  const qrAmount = document.getElementById('qrAmount');
-  const qrCanvas = document.getElementById('qrCanvas');
-  
-  const usd = parseFloat(usdBox.value) || 0;
-  const BTC_RATE = 76393;
-  const btc = usd / BTC_RATE;
-  
-<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
 <script>
 const BTC_ADDRESS = 'bc1q6n3femsfdl7td2jewccz4pwhfmaxcfx8x09z0q';
+const BTC_RATE = 43250; // Using $43,250 to match your UI
 
-function updateAll() {
-  const usd = parseFloat(document.getElementById('usdInput').value) || 0;
-  const BTC_RATE = 43250; // matches your "1 BTC = $43,250"
+function updateCalc() {
+  const usdInput = document.querySelector('.calculator input[type="number"]');
+  const btcOutput = document.querySelector('div[style*="color: rgb(255"]');
+  const qrSection = document.getElementById('qrSection');
+  
+  if (!usdInput || !btcOutput) return;
+  
+  const usd = parseFloat(usdInput.value) || 0;
   const btc = usd / BTC_RATE;
   
-  // 1. Update calculator text
-  document.getElementById('btcResult').textContent = `₿${btc.toFixed(8)}`;
+  // Update calculator
+  btcOutput.textContent = `₿${btc.toFixed(8)}`;
   
-  // 2. Update QR code
-  const qrSection = document.getElementById('qrSection');
-  if (usd >= 10) {
-    qrSection.style.display = 'block';
-    QRCode.toCanvas(document.getElementById('qrCanvas'), 
-      `bitcoin:${BTC_ADDRESS}?amount=${btc.toFixed(8)}`, 
-      { width: 200, margin: 1 }
-    );
-    document.getElementById('qrAmount').textContent = `Send: ₿${btc.toFixed(8)}`;
-  } else {
-    qrSection.style.display = 'none';
+  // Update QR
+  if (qrSection) {
+    if (usd >= 10) {
+      qrSection.style.display = 'block';
+      QRCode.toCanvas(document.getElementById('qrCanvas'), 
+        `bitcoin:${BTC_ADDRESS}?amount=${btc.toFixed(8)}`, 
+        { width: 200, margin: 1 }
+      );
+      document.getElementById('qrAmount').textContent = `Send: ₿${btc.toFixed(8)}`;
+    } else {
+      qrSection.style.display = 'none';
+    }
   }
 }
 
-// Run when user types
-document.getElementById('usdInput').addEventListener('input', updateAll);
-
-// Run once when page loads
-document.addEventListener('DOMContentLoaded', updateAll);
+// Hook up input + run once
+document.addEventListener('DOMContentLoaded', function() {
+  const usdInput = document.querySelector('.calculator input[type="number"]');
+  if (usdInput) usdInput.addEventListener('input', updateCalc);
+  updateCalc();
+});
+</script>
 </script>
 </body>
 </html>
