@@ -264,8 +264,8 @@ async function fetchLiveRates() {
 
 // === CALCULATOR ===
 function updateCalc() {
-  const currency = currencySelect.value;
-  const amount = parseFloat(currencyInput.value) || 0;
+  const currency = 'usd'; // since your input is USD Amount
+const amount = parseFloat(document.getElementById('buyAmount').value) || 0;
   const rate = COIN_RATES[currentCoin][currency];
   const symbol = SYMBOLS[currency];
 
