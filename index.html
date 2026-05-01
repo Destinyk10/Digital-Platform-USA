@@ -52,6 +52,9 @@
 .faq-item.active .faq-answer { padding: 0 16px 16px 16px; max-height: 200px; }
    .faq-arrow { transition: transform 0.3s; }
   .faq-item.active .faq-arrow { transform: rotate(180deg); }
+    .live-counter { background: #2b3139; border-radius: 8px; padding: 8px 12px; font-size: 13px; color: #f0b90b; text-align: center; margin-bottom: 16px; font-weight: 600; }
+  .pulse-dot { display: inline-block; width: 8px; height: 8px; background: #25d366; border-radius: 50%; margin-right: 6px; animation: pulse 2s infinite; }
+  @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
   </style>
 </head>
 <body>
@@ -294,6 +297,16 @@
     fetchRates();
     setInterval(updateTimer, 1000);
     updateCalculator();
+        // Fake live counter - updates every 8-15 seconds
+    function updateTradersOnline() {
+      const el = document.getElementById('tradersOnline');
+      let count = parseInt(el.textContent);
+      count += Math.random() > 0.5 ? 1 : -1;
+      if (count < 18) count = 18;
+      if (count > 31) count = 31;
+      el.textContent = count;
+    }
+    setInterval(updateTradersOnline, Math.random() * 7000 + 8000);
   </script>
 </body>
 </html>
