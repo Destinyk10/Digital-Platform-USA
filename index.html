@@ -3,489 +3,233 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Digital Platform USA - Buy & Sell Crypto</title>
+  <title>Digital Platform USA | Buy BTC, ETH, USDT</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #0a0e27;
-      color: #fff;
-      line-height: 1.6;
-      padding: 20px;
-    }
-    
-    .container {
-      max-width: 500px;
-      margin: 0 auto;
-      background: #151a30;
-      border-radius: 16px;
-      padding: 24px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-    }
-    
-    h1 {
-      text-align: center;
-      color: #4da6ff;
-      font-size: 24px;
-      margin-bottom: 8px;
-    }
-    
-    .subtitle {
-      text-align: center;
-      color: #8b92a8;
-      font-size: 14px;
-      margin-bottom: 24px;
-    }
-    
-    .currency-select {
-      width: 100%;
-      padding: 12px;
-      background: #1e2749;
-      border: 1px solid #2a3454;
-      border-radius: 8px;
-      color: #fff;
-      font-size: 16px;
-      margin-bottom: 16px;
-      cursor: pointer;
-    }
-    
-    .coin-buttons {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 16px;
-    }
-    
-    .coin-btn {
-      flex: 1;
-      padding: 12px;
-      background: #1e2749;
-      border: 2px solid #2a3454;
-      border-radius: 8px;
-      color: #8b92a8;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    
-    .coin-btn.active {
-      background: #4da6ff;
-      border-color: #4da6ff;
-      color: #fff;
-    }
-    
-    .input-group {
-      margin-bottom: 16px;
-    }
-    
-    .input-group label {
-      display: block;
-      color: #8b92a8;
-      font-size: 14px;
-      margin-bottom: 8px;
-    }
-    
-    .input-wrapper {
-      position: relative;
-    }
-    
-    .input-wrapper input {
-      width: 100%;
-      padding: 14px;
-      background: #1e2749;
-      border: 1px solid #2a3454;
-      border-radius: 8px;
-      color: #fff;
-      font-size: 18px;
-      font-weight: 600;
-    }
-    
-    .input-wrapper input:focus {
-      outline: none;
-      border-color: #4da6ff;
-    }
-    
-    .crypto-output {
-      padding: 14px;
-      background: #1e2749;
-      border: 1px solid #2a3454;
-      border-radius: 8px;
-      font-size: 18px;
-      font-weight: 600;
-      color: #4da6ff;
-    }
-    
-    .rate-info {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px;
-      background: #1e2749;
-      border-radius: 8px;
-      margin-bottom: 12px;
-      font-size: 14px;
-    }
-    
-    #rateText {
-      color: #4da6ff;
-      font-weight: 600;
-    }
-    
-    #expiryTimer {
-      color: #ff6b6b;
-      font-size: 12px;
-    }
-    
-    .buy-btn {
-      width: 100%;
-      padding: 16px;
-      background: #25D366;
-      border: none;
-      border-radius: 8px;
-      color: #fff;
-      font-size: 16px;
-      font-weight: 700;
-      cursor: pointer;
-      margin: 16px 0;
-      transition: all 0.2s;
-    }
-    
-    .buy-btn:hover {
-      background: #1fa855;
-      transform: translateY(-1px);
-    }
-    
-    .trust-badges {
-      display: flex;
-      justify-content: space-around;
-      text-align: center;
-      margin: 24px 0;
-      padding: 16px 0;
-      border-top: 1px solid #2a3454;
-      border-bottom: 1px solid #2a3454;
-    }
-    
-    .badge {
-      font-size: 12px;
-      color: #8b92a8;
-    }
-    
-    .badge strong {
-      display: block;
-      color: #4da6ff;
-      font-size: 18px;
-      margin-bottom: 4px;
-    }
-    
-    h2 {
-      color: #4da6ff;
-      text-align: center;
-      margin: 30px 0 15px 0;
-      font-size: 20px;
-    }
-    
-    .faq-container {
-      margin-bottom: 24px;
-    }
-    
-    .faq-item {
-      background: #1e2749;
-      border-radius: 8px;
-      margin-bottom: 8px;
-      overflow: hidden;
-    }
-    
-    .faq-question {
-      width: 100%;
-      padding: 16px;
-      background: transparent;
-      border: none;
-      color: #fff;
-      font-size: 15px;
-      font-weight: 600;
-      text-align: left;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
-    .faq-question:hover {
-      background: #252d4a;
-    }
-    
-    .faq-icon {
-      color: #4da6ff;
-      font-size: 20px;
-      transition: transform 0.3s;
-    }
-    
-    .faq-item.active .faq-icon {
-      transform: rotate(45deg);
-    }
-    
-    .faq-answer {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease;
-      padding: 0 16px;
-    }
-    
-    .faq-item.active .faq-answer {
-      max-height: 200px;
-      padding: 0 16px 16px 16px;
-    }
-    
-    .faq-answer p {
-      color: #8b92a8;
-      font-size: 14px;
-      line-height: 1.6;
-    }
-    
-    .testimonial {
-      background: #1e2749;
-      padding: 16px;
-      border-radius: 8px;
-      margin-bottom: 12px;
-      border-left: 3px solid #4da6ff;
-    }
-    
-    .testimonial p {
-      font-size: 14px;
-      color: #c9d1e6;
-      margin-bottom: 8px;
-    }
-    
-    .testimonial .author {
-      font-size: 12px;
-      color: #8b92a8;
-      font-weight: 600;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0b0e11; color: #eaecef; line-height: 1.6; }
+   .container { max-width: 480px; margin: 0 auto; padding: 20px 16px; }
+   .header { text-align: center; margin-bottom: 24px; }
+   .logo { font-size: 24px; font-weight: 800; color: #f0b90b; margin-bottom: 8px; }
+   .subtitle { color: #8b92a8; font-size: 14px; }
+   .card { background: #1e2329; border: 1px solid #2b3139; border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+   .rate-timer { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; font-size: 13px; color: #8b92a8; }
+   .timer { color: #f0b90b; font-weight: 600; }
+   .coin-tabs { display: flex; gap: 8px; margin-bottom: 20px; }
+   .coin-tab { flex: 1; padding: 10px; background: #2b3139; border: 1px solid #2b3139; border-radius: 8px; color: #8b92a8; text-align: center; cursor: pointer; font-weight: 600; font-size: 14px; transition: all 0.2s; }
+   .coin-tab.active { background: #f0b90b; color: #0b0e11; border-color: #f0b90b; }
+   .input-group { margin-bottom: 16px; }
+   .input-label { display: block; font-size: 13px; color: #8b92a8; margin-bottom: 8px; }
+   .input-row { display: flex; gap: 8px; }
+   .currency-select { padding: 12px; background: #2b3139; border: 1px solid #2b3139; border-radius: 8px; color: #eaecef; font-weight: 600; }
+   .amount-input { flex: 1; padding: 12px; background: #2b3139; border: 1px solid #2b3139; border-radius: 8px; color: #eaecef; font-size: 16px; }
+   .amount-input:focus { outline: none; border-color: #f0b90b; }
+   .result-box { background: #2b3139; border-radius: 8px; padding: 16px; margin: 16px 0; text-align: center; }
+   .result-label { font-size: 13px; color: #8b92a8; margin-bottom: 4px; }
+   .result-amount { font-size: 24px; font-weight: 700; color: #f0b90b; }
+   .rate-info { font-size: 12px; color: #8b92a8; text-align: center; margin-bottom: 16px; }
+   .buy-btn { width: 100%; padding: 16px; background: #25d366; border: none; border-radius: 8px; color: #fff; font-size: 16px; font-weight: 700; cursor: pointer; margin-bottom: 8px; transition: all 0.2s; }
+   .buy-btn:hover { background: #1fa855; transform: translateY(-1px); }
+   .telegram-btn { width: 100%; padding: 16px; background: #0088cc; border: none; border-radius: 8px; color: #fff; font-size: 16px; font-weight: 700; cursor: pointer; margin: 8px 0 16px 0; transition: all 0.2s; }
+   .telegram-btn:hover { background: #0077b3; transform: translateY(-1px); }
+   .trust-line { text-align: center; color: #8b92a8; font-size: 12px; margin-top: 20px; }
+   .faq-title { font-size: 18px; font-weight: 700; margin: 24px 0 12px 0; }
+   .faq-item { background: #1e2329; border: 1px solid #2b3139; border-radius: 8px; margin-bottom: 8px; overflow: hidden; }
+   .faq-question { padding: 16px; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+   .faq-answer { padding: 0 16px; max-height: 0; overflow: hidden; transition: all 0.3s; color: #8b92a8; font-size: 14px; }
+   .faq-item.active.faq-answer { padding: 0 16px 16px 16px; max-height: 200px; }
+   .faq-arrow { transition: transform 0.3s; }
+   .faq-item.active.faq-arrow { transform: rotate(180deg); }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Your Crypto Trading Partner</h1>
-    <p class="subtitle">Buy & Trade Bitcoin Instantly</p>
-    
-    <select id="currencySelect" class="currency-select">
-      <option value="usd">🇺🇸 USD → Crypto</option>
-      <option value="gbp">🇬🇧 GBP → Crypto</option>
-      <option value="eur">🇪🇺 EUR → Crypto</option>
-    </select>
-    
-    <div class="coin-buttons">
-      <button id="btnBTC" class="coin-btn active">Bitcoin</button>
-      <button id="btnUSDT" class="coin-btn">USDT</button>
-      <button id="btnETH" class="coin-btn">Ethereum</button>
+    <div class="header">
+      <div class="logo">Digital Platform USA</div>
+      <p class="subtitle">1000+ Verified Trades | 5-15 Min Delivery | Rates Beat Exchanges</p>
     </div>
-    
-    <div class="input-group">
-      <label>You Pay</label>
-      <div class="input-wrapper">
-        <input type="number" id="usdInput" placeholder="Enter amount" value="0" min="0" step="any">
+
+    <div class="card">
+      <div class="rate-timer">
+        <span>Live Rates</span>
+        <span class="timer">Refresh in <span id="timer">5:00</span></span>
       </div>
-    </div>
-    
-    <div class="input-group">
-      <label>You Receive</label>
-      <div class="crypto-output" id="cryptoOutput">₿0.00000000</div>
-    </div>
-    
-    <div class="rate-info">
-      <span id="rateText">1 BTC = $43,250</span>
-      <span id="expiryTimer">Rate expires in 5:00</span>
-    </div>
-    
-    <button id="buyNowBtn" class="buy-btn">Buy Now on WhatsApp</button>
-    
-    <div class="trust-badges">
-      <div class="badge">
-        <strong>1000+</strong>
-        Trades
+
+      <div class="coin-tabs">
+        <div class="coin-tab active" data-coin="bitcoin">BTC</div>
+        <div class="coin-tab" data-coin="ethereum">ETH</div>
+        <div class="coin-tab" data-coin="tether">USDT</div>
       </div>
-      <div class="badge">
-        <strong>5-15min</strong>
-        Delivery
-      </div>
-      <div class="badge">
-        <strong>24/7</strong>
-        Support
-      </div>
-    </div>
-    
-    <h2>Frequently Asked Questions</h2>
-    <div class="faq-container">
-      <div class="faq-item">
-        <button class="faq-question">
-          How fast is delivery? <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-answer">
-          <p>Most orders are delivered within 5-15 minutes after payment confirmation. Max 30 minutes during high volume.</p>
+
+      <div class="input-group">
+        <label class="input-label">You Pay</label>
+        <div class="input-row">
+          <select class="currency-select" id="currencySelect">
+            <option value="usd">USD</option>
+            <option value="ngn">NGN</option>
+          </select>
+          <input type="number" class="amount-input" id="usdInput" placeholder="5000" value="5000">
         </div>
       </div>
-      
-      <div class="faq-item">
-        <button class="faq-question">
-          What payment methods do you accept? <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-answer">
-          <p>We accept Bank Transfer, Zelle, CashApp, Wise, and USDT. Chat with us on WhatsApp to confirm the best method for your location.</p>
-        </div>
+
+      <div class="result-box">
+        <div class="result-label">You Get</div>
+        <div class="result-amount" id="cryptoAmount">₿0.00000000</div>
       </div>
-      
-      <div class="faq-item">
-        <button class="faq-question">
-          What is the minimum/maximum I can buy? <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-answer">
-          <p>Minimum: $100 USD or equivalent. Maximum: $50,000 USD per transaction. For larger amounts, contact us directly.</p>
-        </div>
+
+      <div class="rate-info" id="rateInfo">1 BTC = $0</div>
+
+      <button id="buyNowBtn" class="buy-btn">Buy Now on WhatsApp</button>
+      <button id="telegramBtn" class="telegram-btn">Chat on Telegram</button>
+
+      <p class="trust-line">
+        Trusted by 1000+ traders | 24/7 Support: WhatsApp +1 272-423-4263 | Telegram +234 9168549250
+      </p>
+    </div>
+
+    <div class="faq-title">FAQ</div>
+    <div class="faq-item">
+      <div class="faq-question">
+        How fast do I get my crypto?
+        <span class="faq-arrow">▼</span>
       </div>
-      
-      <div class="faq-item">
-        <button class="faq-question">
-          Is this safe and legit? <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-answer">
-          <p>Yes. 1000+ successful trades, 24/7 support, and live rates. Check our client testimonials. We never ask for your wallet seed phrase.</p>
-        </div>
-      </div>
-      
-      <div class="faq-item">
-        <button class="faq-question">
-          Do you charge hidden fees? <span class="faq-icon">+</span>
-        </button>
-        <div class="faq-answer">
-          <p>No hidden fees. The calculator shows the exact amount you receive. Network fees are included in the rate you see.</p>
-        </div>
+      <div class="faq-answer">
+        5 to 15 minutes after payment confirmation. Bank transfers, CashApp, and Zelle supported for US customers.
       </div>
     </div>
-    
-    <h2>What Clients Say</h2>
-    <div class="testimonial">
-      <p>"Got my BTC in 8 minutes. Best rate I've found. Will use again!"</p>
-      <div class="author">- James K., Lagos</div>
-    </div>
-    <div class="testimonial">
-      <p>"Super fast and professional. Sent USDT and received confirmation instantly."</p>
-      <div class="author">- Sarah M., Abuja</div>
-    </div>
-    <div class="testimonial">
-      <p>"Third time buying here. Never had issues. Highly recommend."</p>
-      <div class="author">- David O., UK</div>
+    <div class="faq-item">
+      <div class="faq-question">
+        What are your fees?
+        <span class="faq-arrow">▼</span>
+      </div>
+      <div class="faq-answer">
+        Zero hidden fees. The rate you see is the rate you pay. Our rates beat Coinbase and Binance P2P.
+      </div>
+    <div class="faq-item">
+      <div class="faq-question">
+        Is KYC required?
+        <span class="faq-arrow">▼</span>
+      </div>
+      <div class="faq-answer">
+        No KYC for trades under $3,000. For larger amounts, we require basic ID verification to comply with US regulations.
+      </div>
     </div>
   </div>
 
-<script>
-// === CONFIG - CHANGE THIS ===
-const WHATSAPP_NUMBER = "+12724234263"; // REPLACE WITH YOUR REAL WHATSAPP NUMBER
+  <script>
+    const WHATSAPP_NUMBER = "12724234263";
+    const TELEGRAM_NUMBER = "+2349168549250";
 
-// === STATE ===
-let currentCoin = 'BTC';
-let currentCurrency = 'usd';
-let liveRates = { BTC: 43250, USDT: 1, ETH: 2300 };
-let timeLeft = 300;
+    let liveRates = { bitcoin: 0, ethereum: 0, tether: 1 };
+    let currentCoin = "bitcoin";
+    let currentCurrency = "usd";
+    let usdToNgn = 1650;
 
-// === DOM ELEMENTS ===
-const usdInput = document.getElementById('usdInput');
-const cryptoOutput = document.getElementById('cryptoOutput');
-const rateText = document.getElementById('rateText');
-const expiryTimer = document.getElementById('expiryTimer');
-const currencySelect = document.getElementById('currencySelect');
-const buyNowBtn = document.getElementById('buyNowBtn');
+    const usdInput = document.getElementById('usdInput');
+    const cryptoAmount = document.getElementById('cryptoAmount');
+    const rateInfo = document.getElementById('rateInfo');
+    const currencySelect = document.getElementById('currencySelect');
+    const buyNowBtn = document.getElementById('buyNowBtn');
+    const telegramBtn = document.getElementById('telegramBtn');
+    const timerEl = document.getElementById('timer');
 
-// === FETCH LIVE RATES ===
-async function fetchLiveRates() {
-  try {
-    const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,tether,ethereum&vs_currencies=usd');
-    const data = await res.json();
-    liveRates.BTC = data.bitcoin.usd;
-    liveRates.USDT = data.tether.usd;
-    liveRates.ETH = data.ethereum.usd;
-    updateCalc();
-  } catch(e) {
-    console.log('Using backup rates');
-    updateCalc();
-  }
-}
+    async function fetchRates() {
+      try {
+        const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether&vs_currencies=usd');
+        const data = await res.json();
+        liveRates.bitcoin = data.bitcoin.usd;
+        liveRates.ethereum = data.ethereum.usd;
+        liveRates.tether = data.tether.usd;
 
-// === CALCULATOR ===
-function updateCalc() {
-  const amount = parseFloat(usdInput.value) || 0;
-  const rate = liveRates[currentCoin];
-  const cryptoAmount = amount / rate;
-  
-  cryptoOutput.textContent = `₿${cryptoAmount.toFixed(8)}`;
-  rateText.textContent = `1 ${currentCoin} = $${rate.toLocaleString()}`;
-}
+        const ngnRes = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
+        const ngnData = await ngnRes.json();
+        usdToNgn = ngnData.rates.NGN || 1650;
 
-// === TIMER ===
-function updateTimer() {
-  timeLeft--;
-  if (timeLeft <= 0) {
-    timeLeft = 300;
-    fetchLiveRates();
-  }
-  const min = Math.floor(timeLeft / 60);
-  const sec = timeLeft % 60;
-  expiryTimer.textContent = `Rate expires in ${min}:${sec.toString().padStart(2, '0')}`;
-}
+        updateCalculator();
+      } catch (err) {
+        console.log('Rate fetch failed, using cached rates');
+      }
+    }
 
-// === EVENT LISTENERS ===
-usdInput.addEventListener('input', updateCalc);
+    function updateCalculator() {
+      const amount = parseFloat(usdInput.value) || 0;
+      const coinRate = liveRates[currentCoin];
+      let usdAmount = amount;
 
-currencySelect.addEventListener('change', () => {
-  currentCurrency = currencySelect.value;
-  updateCalc();
-});
+      if (currentCurrency === 'ngn') {
+        usdAmount = amount / usdToNgn;
+      }
 
-document.getElementById('btnBTC').addEventListener('click', () => {
-  currentCoin = 'BTC';
-  document.querySelectorAll('.coin-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('btnBTC').classList.add('active');
-  updateCalc();
-});
+      const cryptoValue = usdAmount / coinRate;
+      let symbol = '₿';
+      if (currentCoin === 'ethereum') symbol = 'Ξ';
+      if (currentCoin === 'tether') symbol = '₮';
 
-document.getElementById('btnUSDT').addEventListener('click', () => {
-  currentCoin = 'USDT';
-  document.querySelectorAll('.coin-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('btnUSDT').classList.add('active');
-  updateCalc();
-});
+      cryptoAmount.textContent = symbol + cryptoValue.toFixed(8);
 
-document.getElementById('btnETH').addEventListener('click', () => {
-  currentCoin = 'ETH';
-  document.querySelectorAll('.coin-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('btnETH').classList.add('active');
-  updateCalc();
-});
+      if (currentCurrency === 'usd') {
+        rateInfo.textContent = `1 ${currentCoin.toUpperCase()} = $${coinRate.toLocaleString()}`;
+      } else {
+        rateInfo.textContent = `1 ${currentCoin.toUpperCase()} = ₦${(coinRate * usdToNgn).toLocaleString()}`;
+      }
+    }
 
-buyNowBtn.addEventListener('click', () => {
-  const amount = usdInput.value || '0';
-  const rate = liveRates[currentCoin];
-  const msg = `Hi! I want to buy $${amount} ${currentCurrency.toUpperCase()} of ${currentCoin}. Current rate: 1 ${currentCoin} = $${rate.toLocaleString()}`;
-  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
-});
+    document.querySelectorAll('.coin-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.coin-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        currentCoin = tab.dataset.coin;
+        updateCalculator();
+      });
+    });
 
-// === FAQ ACCORDION ===
-document.querySelectorAll('.faq-question').forEach(button => {
-  button.addEventListener('click', () => {
-    const faqItem = button.parentElement;
-    const isActive = faqItem.classList.contains('active');
-    document.querySelectorAll('.faq-item').forEach(item => item.classList.remove('active'));
-    if (!isActive) faqItem.classList.add('active');
-  });
-});
+    currencySelect.addEventListener('change', (e) => {
+      currentCurrency = e.target.value;
+      usdInput.placeholder = currentCurrency === 'usd'? '5000' : '8000000';
+      updateCalculator();
+    });
 
-// === INIT ===
-fetchLiveRates();
-setInterval(updateTimer, 1000);
-</script>
+    usdInput.addEventListener('input', updateCalculator);
+
+    buyNowBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const amount = usdInput.value || '0';
+      const rate = liveRates[currentCoin];
+      const curr = currentCurrency.toUpperCase();
+      const msg = `Hi! I want to buy ${curr} ${amount} of ${currentCoin}. Current rate: 1 ${currentCoin} = $${rate.toLocaleString()}`;
+      window.location.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+    });
+
+    telegramBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const amount = usdInput.value || '0';
+      const rate = liveRates[currentCoin];
+      const curr = currentCurrency.toUpperCase();
+      const msg = `Hi! I want to buy ${curr} ${amount} of ${currentCoin}. Current rate: 1 ${currentCoin} = $${rate.toLocaleString()}`;
+      window.location.href = `https://t.me/${TELEGRAM_NUMBER}?text=${encodeURIComponent(msg)}`;
+    });
+
+    document.querySelectorAll('.faq-question').forEach(q => {
+      q.addEventListener('click', () => {
+        q.parentElement.classList.toggle('active');
+      });
+    });
+
+    let timeLeft = 300;
+    function updateTimer() {
+      const mins = Math.floor(timeLeft / 60);
+      const secs = timeLeft % 60;
+      timerEl.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+      if (timeLeft <= 0) {
+        timeLeft = 300;
+        fetchRates();
+      } else {
+        timeLeft--;
+      }
+    }
+
+    fetchRates();
+    setInterval(updateTimer, 1000);
+    updateCalculator();
+  </script>
 </body>
 </html>
