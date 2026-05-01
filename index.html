@@ -4,69 +4,69 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Digital Platform USA | Buy BTC, ETH, USDT</title>
- <div class="menu-btn" id="menuBtn">☰</div>
-<div class="menu-dropdown" id="menuDropdown">
-  <a href="#buy">Buy Crypto</a>
-  <a href="#reviews">Client Reviews</a>
-  <a href="#faq">FAQ</a>
-  <a href="https://wa.me/12724234263">Contact</a>
-</div>
   <style>
-    .header { position: relative; text-align: center; margin-bottom: 24px; }
-.menu-btn { position: absolute; top: 0; right: 0; font-size: 24px; cursor: pointer; color: #f0b90b; padding: 8px; }
-.menu-dropdown { display: none; position: absolute; top: 40px; right: 0; background: #1e2329; border: 1px solid #2b3139; border-radius: 8px; min-width: 160px; z-index: 100; }
-.menu-dropdown.active { display: block; }
-.menu-dropdown a { display: block; padding: 12px 16px; color: #eaecef; text-decoration: none; font-size: 14px; border-bottom: 1px solid #2b3139; }
-.menu-dropdown a:last-child { border-bottom: none; }
-.menu-dropdown a:hover { background: #2b3139; color: #f0b90b; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0b0e11; color: #eaecef; line-height: 1.6; }
-.container { max-width: 480px; margin: 0 auto; padding: 20px 16px; }
-.header { text-align: center; margin-bottom: 24px; }
-.logo { font-size: 24px; font-weight: 800; color: #f0b90b; margin-bottom: 8px; }
-.subtitle { color: #8b92a8; font-size: 14px; }
-.card { background: #1e2329; border: 1px solid #2b3139; border-radius: 12px; padding: 20px; margin-bottom: 16px; }
-.rate-timer { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; font-size: 13px; color: #8b92a8; }
-.timer { color: #f0b90b; font-weight: 600; }
-.coin-tabs { display: flex; gap: 8px; margin-bottom: 20px; }
-.coin-tab { flex: 1; padding: 10px; background: #2b3139; border: 1px solid #2b3139; border-radius: 8px; color: #8b92a8; text-align: center; cursor: pointer; font-weight: 600; font-size: 14px; transition: all 0.2s; }
-.coin-tab.active { background: #f0b90b; color: #0b0e11; border-color: #f0b90b; }
-.input-group { margin-bottom: 16px; }
-.input-label { display: block; font-size: 13px; color: #8b92a8; margin-bottom: 8px; }
-.input-row { display: flex; gap: 8px; }
-.currency-select { padding: 12px; background: #2b3139; border: 1px solid #2b3139; border-radius: 8px; color: #eaecef; font-weight: 600; }
-.amount-input { flex: 1; padding: 12px; background: #2b3139; border: 1px solid #2b3139; border-radius: 8px; color: #eaecef; font-size: 16px; }
-.amount-input:focus { outline: none; border-color: #f0b90b; }
-.result-box { background: #2b3139; border-radius: 8px; padding: 16px; margin: 16px 0; text-align: center; }
-.result-label { font-size: 13px; color: #8b92a8; margin-bottom: 4px; }
-.result-amount { font-size: 24px; font-weight: 700; color: #f0b90b; }
-.rate-info { font-size: 12px; color: #8b92a8; text-align: center; margin-bottom: 16px; }
-.buy-btn { width: 100%; padding: 16px; background: #25d366; border: none; border-radius: 8px; color: #fff; font-size: 16px; font-weight: 700; cursor: pointer; margin-bottom: 8px; transition: all 0.2s; }
-.buy-btn:hover { background: #1fa855; transform: translateY(-1px); }
-.telegram-btn { width: 100%; padding: 16px; background: #0088cc; border: none; border-radius: 8px; color: #fff; font-size: 16px; font-weight: 700; cursor: pointer; margin: 8px 0 16px 0; transition: all 0.2s; }
-.telegram-btn:hover { background: #0077b3; transform: translateY(-1px); }
-.trust-line { text-align: center; color: #8b92a8; font-size: 12px; margin-top: 20px; }
-.section-title { font-size: 18px; font-weight: 700; margin: 24px 0 12px 0; }
-.testimonial { background: #1e2329; border: 1px solid #2b3139; border-radius: 8px; padding: 16px; margin-bottom: 12px; }
-.stars { color: #f0b90b; font-size: 16px; margin-bottom: 8px; letter-spacing: 2px; }
-.testimonial-text { color: #eaecef; font-size: 14px; margin-bottom: 8px; font-style: italic; }
-.testimonial-name { color: #f0b90b; font-size: 13px; font-weight: 600; }
-.testimonial-role { color: #8b92a8; font-size: 12px; }
-.faq-item { background: #1e2329; border: 1px solid #2b3139; border-radius: 8px; margin-bottom: 8px; overflow: hidden; }
-.faq-question { padding: 16px; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-.faq-answer { padding: 0 16px; max-height: 0; overflow: hidden; transition: all 0.3s; color: #8b92a8; font-size: 14px; }
-.faq-item.active .faq-answer { padding: 0 16px 16px 16px; max-height: 200px; }
-.faq-item.active .faq-arrow { transform: rotate(180deg); }
+   .container { max-width: 480px; margin: 0 auto; padding: 20px 16px; }
+   .header { position: relative; text-align: center; margin-bottom: 24px; }
+   .logo { font-size: 24px; font-weight: 800; color: #f0b90b; margin-bottom: 8px; }
+   .subtitle { color: #8b92a8; font-size: 14px; }
+   .menu-btn { position: absolute; top: 0; right: 0; font-size: 24px; cursor: pointer; color: #f0b90b; padding: 8px; user-select: none; }
+   .menu-dropdown { display: none; position: absolute; top: 40px; right: 0; background: #1e2329; border: 1px solid #2b3139; border-radius: 8px; min-width: 160px; z-index: 100; }
+   .menu-dropdown.active { display: block; }
+   .menu-dropdown a { display: block; padding: 12px 16px; color: #eaecef; text-decoration: none; font-size: 14px; border-bottom: 1px solid #2b3139; }
+   .menu-dropdown a:last-child { border-bottom: none; }
+   .menu-dropdown a:hover { background: #2b3139; color: #f0b90b; }
+   .card { background: #1e2329; border: 1px solid #2b3139; border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+   .rate-timer { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; font-size: 13px; color: #8b92a8; }
+   .timer { color: #f0b90b; font-weight: 600; }
+   .coin-tabs { display: flex; gap: 8px; margin-bottom: 20px; }
+   .coin-tab { flex: 1; padding: 10px; background: #2b3139; border: 1px solid #2b3139; border-radius: 8px; color: #8b92a8; text-align: center; cursor: pointer; font-weight: 600; font-size: 14px; transition: all 0.2s; }
+   .coin-tab.active { background: #f0b90b; color: #0b0e11; border-color: #f0b90b; }
+   .input-group { margin-bottom: 16px; }
+   .input-label { display: block; font-size: 13px; color: #8b92a8; margin-bottom: 8px; }
+   .input-row { display: flex; gap: 8px; }
+   .currency-select { padding: 12px; background: #2b3139; border: 1px solid #2b3139; border-radius: 8px; color: #eaecef; font-weight: 600; }
+   .amount-input { flex: 1; padding: 12px; background: #2b3139; border: 1px solid #2b3139; border-radius: 8px; color: #eaecef; font-size: 16px; }
+   .amount-input:focus { outline: none; border-color: #f0b90b; }
+   .result-box { background: #2b3139; border-radius: 8px; padding: 16px; margin: 16px 0; text-align: center; }
+   .result-label { font-size: 13px; color: #8b92a8; margin-bottom: 4px; }
+   .result-amount { font-size: 24px; font-weight: 700; color: #f0b90b; }
+   .rate-info { font-size: 12px; color: #8b92a8; text-align: center; margin-bottom: 16px; }
+   .buy-btn { width: 100%; padding: 16px; background: #25d366; border: none; border-radius: 8px; color: #fff; font-size: 16px; font-weight: 700; cursor: pointer; margin-bottom: 8px; transition: all 0.2s; }
+   .buy-btn:hover { background: #1fa855; transform: translateY(-1px); }
+   .telegram-btn { width: 100%; padding: 16px; background: #0088cc; border: none; border-radius: 8px; color: #fff; font-size: 16px; font-weight: 700; cursor: pointer; margin: 8px 0 16px 0; transition: all 0.2s; }
+   .telegram-btn:hover { background: #0077b3; transform: translateY(-1px); }
+   .trust-line { text-align: center; color: #8b92a8; font-size: 12px; margin-top: 20px; }
+   .section-title { font-size: 18px; font-weight: 700; margin: 24px 0 12px 0; }
+   .testimonial { background: #1e2329; border: 1px solid #2b3139; border-radius: 8px; padding: 16px; margin-bottom: 12px; }
+   .stars { color: #f0b90b; font-size: 16px; margin-bottom: 8px; letter-spacing: 2px; }
+   .testimonial-text { color: #eaecef; font-size: 14px; margin-bottom: 8px; font-style: italic; }
+   .testimonial-name { color: #f0b90b; font-size: 13px; font-weight: 600; }
+   .testimonial-role { color: #8b92a8; font-size: 12px; }
+   .faq-item { background: #1e2329; border: 1px solid #2b3139; border-radius: 8px; margin-bottom: 8px; overflow: hidden; }
+   .faq-question { padding: 16px; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+   .faq-answer { padding: 0 16px; max-height: 0; overflow: hidden; transition: all 0.3s; color: #8b92a8; font-size: 14px; }
+   .faq-item.active.faq-answer { padding: 0 16px 16px 16px; max-height: 200px; }
+   .faq-arrow { transition: transform 0.3s; }
+   .faq-item.active.faq-arrow { transform: rotate(180deg); }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
       <div class="logo">Digital Platform USA</div>
+      <div class="menu-btn" id="menuBtn">☰</div>
+      <div class="menu-dropdown" id="menuDropdown">
+        <a href="#buy">Buy Crypto</a>
+        <a href="#reviews">Client Reviews</a>
+        <a href="#faq">FAQ</a>
+        <a href="https://wa.me/12724234263">Contact</a>
+      </div>
       <p class="subtitle">1000+ Verified Trades | 5-15 Min Delivery | Rates Beat Exchanges</p>
     </div>
 
-    <div class="card">
+    <div class="card" id="buy">
       <div class="rate-timer">
         <span>Live Rates</span>
         <span class="timer">Refresh in <span id="timer">5:00</span></span>
@@ -105,7 +105,7 @@
       </p>
     </div>
 
-    <div class="section-title">What US Traders Say</div>
+    <div class="section-title" id="reviews">What US Traders Say</div>
     <div class="testimonial">
       <div class="stars">★★★★★</div>
       <p class="testimonial-text">"Got my BTC in 6 minutes. Used CashApp and they beat Coinbase rates by $200 on my $3k buy. Legit."</p>
@@ -125,7 +125,7 @@
       <div class="testimonial-role">New York, NY | $4,200 trade</div>
     </div>
 
-    <div class="section-title">FAQ</div>
+    <div class="section-title" id="faq">FAQ</div>
     <div class="faq-item">
       <div class="faq-question">
         How fast do I get my crypto?
@@ -197,7 +197,7 @@
       const fxRate = exchangeRates[currentCurrency];
       const usdAmount = currentCurrency === 'usd'? amount : amount / fxRate;
       const cryptoValue = usdAmount / coinRateUSD;
-      
+
       let symbol = '₿';
       if (currentCoin === 'ethereum') symbol = 'Ξ';
       if (currentCoin === 'tether') symbol = '₮';
@@ -263,21 +263,27 @@
       }
     }
 
+    document.addEventListener('DOMContentLoaded', () => {
+      const menuBtn = document.getElementById('menuBtn');
+      const menuDropdown = document.getElementById('menuDropdown');
+
+      if (menuBtn && menuDropdown) {
+        menuBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          menuDropdown.classList.toggle('active');
+        });
+
+        document.addEventListener('click', (e) => {
+          if (!e.target.closest('.menu-btn') &&!e.target.closest('.menu-dropdown')) {
+            menuDropdown.classList.remove('active');
+          }
+        });
+      }
+    });
+
     fetchRates();
     setInterval(updateTimer, 1000);
     updateCalculator();
-    document.getElementById('menuBtn').addEventListener('click', () => {
-  document.getElementById('menuDropdown').classList.toggle('active');
-});
-
-// Close menu when clicking outside
-document.addEventListener('click', (e) => {
-  if (!e.target.closest('.menu-btn') && !e.target.closest('.menu-dropdown')) {
-    document.getElementById('menuDropdown').classList.remove('active');
-  }
-});<div class="card" id="buy">  ← Add id="buy"
-<div class="section-title" id="reviews">What US Traders Say</div>  ← Add id="reviews" 
-<div class="section-title" id="faq">FAQ</div>  ← Add id="faq"
   </script>
 </body>
 </html>
