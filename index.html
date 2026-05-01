@@ -184,7 +184,7 @@
       const fxRate = exchangeRates[currentCurrency];
       const usdAmount = currentCurrency === 'usd'? amount : amount / fxRate;
       const cryptoValue = usdAmount / coinRateUSD;
-
+      
       let symbol = '₿';
       if (currentCoin === 'ethereum') symbol = 'Ξ';
       if (currentCoin === 'tether') symbol = '₮';
