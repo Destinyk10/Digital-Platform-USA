@@ -470,7 +470,7 @@ buyNowBtn.addEventListener('click', () => {
   const amount = usdInput.value || '0';
   const rate = liveRates[currentCoin];
   const msg = `Hi! I want to buy $${amount} ${currentCurrency.toUpperCase()} of ${currentCoin}. Current rate: 1 ${currentCoin} = $${rate.toLocaleString()}`;
-  window.open(`https://wa.me/$+12724234263?text=${encodeURIComponent(msg)}`, '_blank');
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
 });
 
 // === FAQ ACCORDION ===
