@@ -137,11 +137,10 @@
     <h1>Your Crypto Trading Partner</h1>
     <p class="subtitle">Buy & Trade Bitcoin in the USA</p>
 
-    <div class="calculator">
-      <h2>BTC Calculator</h2>
-      
-      <select id="currencySelect" class="currency-select">
+    <select id="currencySelect" class="currency-select">
         <option value="usd">🇺🇸 USD → Crypto</option>
+        <option value="gbp">🇬🇧 GBP → Crypto</option>
+        <option value="eur">🇪🇺 EUR → Crypto</option>
       </select>
 
       <div class="coin-buttons">
@@ -150,17 +149,37 @@
         <button id="btnETH" class="coin-btn" onclick="switchCoin('ETH')">ETH</button>
       </div>
 
-      <input type="number" id="usdInput" placeholder="Enter USD amount" value="0">
+      <input type="number" id="usdInput" placeholder="Enter amount" value="0">
       
       <div id="btcOutput">₿0.00000000</div>
       <div id="rateText">1 BTC = $43,250</div>
       <div id="expiryTimer">Rate expires in 5:00</div>
+      <div style="text-align: center; color: #888; font-size: 12px; margin-top: 5px;">Min: $100 | Max: $50,000</div>
+
+      <a href="#" id="buyNowBtn" class="whatsapp-btn" style="margin-top: 15px; background: #ff9500;">
+        🛒 Buy Now on WhatsApp
+      </a>
+    
+<div style="display: flex; gap: 10px; margin: 20px 0; text-align: center;">
+      <div style="flex: 1; background: #1a1a1a; padding: 12px; border-radius: 8px;">
+        <div style="font-size: 20px; color: #4da6ff;">⚡</div>
+        <div style="font-size: 12px; color: #888;">Instant Delivery</div>
+      </div>
+      <div style="flex: 1; background: #1a1a1a; padding: 12px; border-radius: 8px;">
+        <div style="font-size: 20px; color: #4da6ff;">🔒</div>
+        <div style="font-size: 12px; color: #888;">1000+ Trades</div>
+      </div>
+      <div style="flex: 1; background: #1a1a1a; padding: 12px; border-radius: 8px;">
+        <div style="font-size: 20px; color: #4da6ff;">💬</div>
+        <div style="font-size: 12px; color: #888;">24/7 Support</div>
+      </div>
     </div>
 
-    <a href="https://wa.me/+12724234263?text=Hi%20I%20want%20to%20buy%20crypto" class="whatsapp-btn">
-      💬 Chat on WhatsApp
-    </a>
-
+    <div style="background: #1a1a1a; padding: 15px; border-radius: 12px; margin: 20px 0;">
+      <h3 style="color: #4da6ff; margin: 0 0 10px 0; text-align: center;">Your Wallet Address</h3>
+      <div style="background: #2a2a2a; padding: 10px; border-radius: 8px; word-break: break-all; font-size: 14px; text-align: center;" id="walletAddress">bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh</div>
+      <button onclick="copyWallet()" style="width: 100%; margin-top: 10px; padding: 12px; background: #4da6ff; border: none; border-radius: 8px; color: #fff; font-weight: bold;">📋 Copy Address</button>
+    </div>
     <div class="qr-section">
       <h3 style="color: #4da6ff;">Scan to Chat</h3>
       <div class="qr-code">
@@ -273,6 +292,30 @@ document.addEventListener('DOMContentLoaded', function() {
   fetchLiveRates();
   setInterval(updateTimer, 1000);
 });
+  // === BUY NOW BUTTON ===
+document.getElementById('buyNowBtn').addEventListener('click', function(e) {
+  e.preventDefault();
+  const amount = parseFloat(currencyInput.value) || 0;
+  const currency = currencySelect.value.toUpperCase();
+  const crypto = btcOutput.textContent;
+  const rate = rateText.textContent;
+  
+  if (amount < 100) {
+    alert('Minimum purchase is $100');
+    return;
+  }
+  
+  const message = `Hi, I want to buy ${crypto} for ${currency} ${amount}. ${rate}. Please send payment details.`;
+  const whatsappURL = `https://wa.me/12724234263?text=${encodeURIComponent(message)}`;
+  window.open(whatsappURL, '_blank');
+});
+
+// === COPY WALLET ===
+function copyWallet() {
+  const wallet = document.getElementById('walletAddress').textContent;
+  navigator.clipboard.writeText(wallet);
+  alert('Wallet address copied!');
+}
 </script>
 </body>
 </html>
