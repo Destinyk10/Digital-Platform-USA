@@ -250,7 +250,7 @@ async function fetchLiveRates() {
     updateCalc();
   } catch(e) {
     console.log('Using backup rates');
-    updateCalc();
+    updateCalculator();
   }
 }
   
@@ -275,30 +275,12 @@ function updateCalculator() {
 
 // Hook it up once page loads
 document.addEventListener('DOMContentLoaded', function() {
-  const usdInput = document.querySelector('.calculator input[type="number"]');
+  const usdInput = document.querySelector('input[placeholder*="USD"]');
   if (usdInput) {
     usdInput.addEventListener('input', updateCalculator);
     updateCalculator(); // Run once on load
   }
 });
-  
-  
-        { width: 200, margin: 1 }
-      );
-      document.getElementById('qrAmount').textContent = `Send: ₿${btc.toFixed(8)}`;
-    } else {
-      qrSection.style.display = 'none';
-    }
-  }
-}
-
-// Hook up input + run once
-document.addEventListener('DOMContentLoaded', function() {
-  const usdInput = document.querySelector('.calculator input[type="number"]');
-  if (usdInput) usdInput.addEventListener('input', updateCalc);
-  updateCalc();
-});
-</script>
-</script>
+<scrip>
 </body>
 </html>
