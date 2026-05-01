@@ -1,258 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
- <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script> <head>
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Digital Platform USA - Buy Bitcoin Instantly</title>
-  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
-    <style>
-    body { 
-      font-family: Arial, sans-serif; 
-      background: #000; 
-      color: #fff; 
-      text-align: center; 
-      margin: 0; 
-      padding: 20px 0;
+  <title>Digital Platform USA - Buy Bitcoin</title>
+  <style>
+    body {
+      background: #0a0a0a;
+      color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 20px;
     }
-    .hero { 
-      width: 100%; 
-      max-width: 500px; 
-      height: auto; 
-      border-radius: 12px; 
-      margin: 20px auto;
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
     }
-    h1 { 
-      color: #ff9800; 
-      font-size: 28px; 
-      margin: 10px 0; 
+    h1 {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 10px;
     }
-    h2 { 
-      color: #ccc; 
-      font-weight: 400; 
-      margin-top: 0; 
+    .subtitle {
+      text-align: center;
+      color: #888;
+      margin-bottom: 30px;
+    }
+    .calculator {
+      background: #1a1a1a;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+    .calculator h2 {
+      color: #4da6ff;
+      text-align: center;
+      margin: 0 0 20px 0;
+    }
+    .currency-select {
+      width: 100%;
+      padding: 12px;
+      background: #2a2a2a;
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+    .coin-buttons {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+    .coin-btn {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .coin-btn.active {
+      background: #4da6ff;
+      color: #fff;
+    }
+    .coin-btn:not(.active) {
+      background: #2a2a2a;
+      color: #888;
+    }
+    #usdInput {
+      width: 100%;
+      padding: 15px;
+      background: #fff;
+      border: 2px solid #4da6ff;
+      border-radius: 8px;
+      font-size: 18px;
+      text-align: center;
+      box-sizing: border-box;
+      margin-bottom: 15px;
+    }
+    #btcOutput {
+      font-size: 24px;
+      color: #ff9500;
+      text-align: center;
+      margin: 15px 0;
+      font-weight: bold;
+    }
+    #rateText {
+      text-align: center;
+      color: #888;
+      font-size: 14px;
+    }
+    #expiryTimer {
+      text-align: center;
+      color: #ff9500;
+      font-size: 14px;
+      margin-top: 5px;
     }
   </style>
 </head>
 <body>
+  <div class="container">
+    <h1>Your Crypto Trading Partner</h1>
+    <p class="subtitle">Buy & Trade Bitcoin in the USA</p>
 
-<div id="crypto-ticker" style="background:#1a1a1a; color:#ff9800; padding:12px; font-weight:bold; text-align:center; margin:0 20px 20px 20px; border-radius:8px; font-size:13px;">
-  Loading Prices...
-</div>
-<script>
-fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether&vs_currencies=usd')
-.then(r=>r.json())
-.then(d=>{
-  document.getElementById('crypto-ticker').innerHTML = 
-    `₿ BTC: $${d.bitcoin.usd.toLocaleString()} | Ξ ETH: $${d.ethereum.usd.toLocaleString()} | ₮ USDT: $${d.tether.usd}`
-});
-</script>
+    <div class="calculator">
+      <h2>BTC Calculator</h2>
+      
+      <select id="currencySelect" class="currency-select">
+        <option value="usd">🇺🇸 USD → Crypto</option>
+      </select>
 
-<div style="max-width:500px; margin:auto;">
-  <h1>Digital Platform USA</h1>
-  <img src="hero.jpg" class="hero" alt="Bitcoin NYC">
-  <h2>Your Crypto Trading Partner</h2>
-  <p>Buy & Trade Bitcoin in the USA</p>
+      <div class="coin-buttons">
+        <button id="btnBTC" class="coin-btn active" onclick="switchCoin('BTC')">BTC</button>
+        <button id="btnUSDT" class="coin-btn" onclick="switchCoin('USDT')">USDT</button>
+        <button id="btnETH" class="coin-btn" onclick="switchCoin('ETH')">ETH</button>
+      </div>
 
-    <div style="background:#111; padding:20px; border-radius:12px; margin:20px;">
-  <div style="background:#111; padding:20px; border-radius:12px; margin:20px;">
-    <h3 style="color:#4da3ff; margin:0 0 10px 0;">BTC Calculator</h3>
-    
-    <select id="currencySelect" style="padding:12px; width:85%; margin-bottom:10px; border-radius:8px; border:none; background:#222; color:#fff; font-size:16px;">
-  <option value="usd">🇺🇸 USD → Crypto</option>
-<option value="gbp">🇬🇧 GBP → Crypto</option>
-<option value="eur">🇪🇺 EUR → Crypto</option>
-<option value="cad">🇨🇦 CAD → Crypto</option>
-    </select>
-    <div style="display:flex; gap:8px; margin-bottom:15px; justify-content:center;">
-  <button id="btnBTC" onclick="switchCoin('BTC')" style="background:#4da3ff; color:#000; border:none; padding:10px 16px; border-radius:6px; font-weight:700;">BTC</button>
-  <button id="btnUSDT" onclick="switchCoin('USDT')" style="background:#1a1a1a; color:#fff; border:none; padding:10px 16px; border-radius:6px; font-weight:700;">USDT</button>
-  <button id="btnETH" onclick="switchCoin('ETH')" style="background:#1a1a1a; color:#fff; border:none; padding:10px 16px; border-radius:6px; font-weight:700;">ETH</button>
-</div>
-    <input id="currencyInput" type="number" placeholder="Enter USD amount" 
-           style="padding:12px; width:85%; margin-bottom:10px; border-radius:8px; border:none; text-align:center; font-size:16px;">
-    
-    <p style="margin:0; font-size:20px; color:#ff9800; font-weight:bold;">
-      <span id="btcOutput">₿0.00000000</span>
-
-    <p style="margin:8px 0 0 0; font-size:13px; color:#888;" id="rateText">1 BTC = $43,250</p><div id="expiryTimer" style="font-size:11px; color:#ff9800; margin-top:5px; text-align:center;">Rate expires in 5:00</div>
-    </p>
-
-  
-
-  <div style="background:#111; padding:20px; border-radius:12px; margin:20px;">
-    <h3 style="color:#4da3ff; margin:0 0 15px 0;">What Clients Say</h3>
-    
-    <div style="background:#1a1a1a; padding:15px; border-radius:8px; margin-bottom:12px; text-align:left;">
-      <p style="margin:0; font-size:14px; line-height:1.4;">⭐⭐⭐⭐⭐ "Got my BTC in 10 minutes. Fast and reliable. Best rate I've seen."</p>
-      <p style="margin:8px 0 0 0; color:#ff9800; font-size:13px; font-weight:bold;">— Ahmed K. Lagos</p>
+      <input type="number" id="usdInput" placeholder="Enter USD amount" value="0">
+      
+      <div id="btcOutput">₿0.00000000</div>
+      <div id="rateText">1 BTC = $43,250</div>
+      <div id="expiryTimer">Rate expires in 5:00</div>
     </div>
 
-    <div style="background:#1a1a1a; padding:15px; border-radius:8px; margin-bottom:12px; text-align:left;">
-      <p style="margin:0; font-size:14px; line-height:1.4;">⭐⭐⭐⭐⭐ "Digital Platform USA is legit. I've done 3 trades with them. No stories."</p>
-      <p style="margin:8px 0 0 0; color:#ff9800; font-size:13px; font-weight:bold;">— Blessing O. Abuja</p>
-    </div>
-
-    <div style="background:#1a1a1a; padding:15px; border-radius:8px; text-align:left;">
-      <p style="margin:0; font-size:14px; line-height:1.4;">⭐⭐⭐⭐⭐ "The calculator helped me plan my buy. WhatsApp support was instant."</p>
-      <p style="margin:8px 0 0 0; color:#ff9800; font-size:13px; font-weight:bold;">— Michael T. Benin City</p>
+    <h2 style="color: #4da6ff; text-align: center;">What Clients Say</h2>
+    <div style="background: #1a1a1a; padding: 15px; border-radius: 12px; margin-bottom: 15px;">
+      <div style="color: #ff9500;">★★★★★</div>
+      <p>"Got my BTC in 10 minutes. Fast and reliable. Best rate I've seen."</p>
+      <p style="color: #ff9500;">— Ahmed K. Lagos</p>
     </div>
   </div>
-
-<!-- FAQ Section -->
-<div style="background:#111; padding:25px 20px; border-radius:12px; margin:30px 0; color:#fff; font-family:Arial, sans-serif; max-width:500px; margin-left:auto; margin-right:auto;">
-  <h3 style="margin:0 0 20px 0; color:#4da3ff; text-align:center; font-size:22px;">Frequently Asked Questions</h3>
-  
-  <div class="faq-item" style="border-bottom:1px solid #333; padding:15px 0;">
-    <div onclick="toggleFaq(this)" style="display:flex; justify-content:space-between; align-items:center; cursor:pointer; font-weight:bold; font-size:16px;">
-      How long does it take to receive my BTC? <span style="color:#4da3ff; font-size:20px;">+</span>
-    </div>
-    <div style="max-height:0; overflow:hidden; transition:max-height 0.3s ease; color:#ccc; font-size:14px; line-height:1.6; padding-top:0;">
-      <p style="margin:10px 0 0 0;">Usually 5-15 minutes after we confirm your payment. During high network traffic it can take up to 30 minutes. You'll get transaction proof on WhatsApp immediately.</p>
-    </div>
-  </div>
-  
-  <div class="faq-item" style="border-bottom:1px solid #333; padding:15px 0;">
-    <div onclick="toggleFaq(this)" style="display:flex; justify-content:space-between; align-items:center; cursor:pointer; font-weight:bold; font-size:16px;">
-      Is this safe? How do I know you're legit? <span style="color:#4da3ff; font-size:20px;">+</span>
-    </div>
-    <div style="max-height:0; overflow:hidden; transition:max-height 0.3s ease; color:#ccc; font-size:14px; line-height:1.6; padding-top:0;">
-      <p style="margin:10px 0 0 0;">We've completed 1000+ trades since 2022. Check our testimonials above. We send BTC first for new clients under $500. You can also request a video call before paying.</p>
-    </div>
-  </div>
-  
-  <div class="faq-item" style="border-bottom:1px solid #333; padding:15px 0;">
-    <div onclick="toggleFaq(this)" style="display:flex; justify-content:space-between; align-items:center; cursor:pointer; font-weight:bold; font-size:16px;">
-      What payment methods do you accept? <span style="color:#4da3ff; font-size:20px;">+</span>
-    </div>
-    <div style="max-height:0; overflow:hidden; transition:max-height 0.3s ease; color:#ccc; font-size:14px; line-height:1.6; padding-top:0;">
-      <p style="margin:10px 0 0 0;">Bank Transfer, Opay, Palmpay, Kuda, USDT. For USD/GBP/EUR we accept Wise, PayPal F&F, and international wire. Message us on WhatsApp for details.</p>
-    </div>
-  </div>
-  
-  <div class="faq-item" style="padding:15px 0;">
-    <div onclick="toggleFaq(this)" style="display:flex; justify-content:space-between; align-items:center; cursor:pointer; font-weight:bold; font-size:16px;">
-      What is your minimum and maximum order? <span style="color:#4da3ff; font-size:20px;">+</span>
-    </div>
-    <div style="max-height:0; overflow:hidden; transition:max-height 0.3s ease; color:#ccc; font-size:14px; line-height:1.6; padding-top:0;">
-      <p style="margin:10px 0 0 0;">Minimum: $50 or ₦50,000. Maximum: $50,000 per transaction. For larger orders, contact us on WhatsApp for OTC rates.</p>
-    </div>
-  </div>
-</div>
 
 <script>
-function toggleFaq(element) {
-  const content = element.nextElementSibling;
-  const icon = element.querySelector('span');
-  
-  if (content.style.maxHeight && content.style.maxHeight !== '0px') {
-    content.style.maxHeight = '0px';
-    content.style.paddingTop = '0px';
-    icon.innerText = '+';
-  } else {
-    content.style.maxHeight = content.scrollHeight + 'px';
-    content.style.paddingTop = '10px';
-    icon.innerText = '−';
-  }
-}
-</script>
-    <div style="max-height:0; overflow:hidden; transition:max-height 0.3s ease; color:#ccc; font-size:14px; line-height:1.6; padding-top:0;">
-      <p style="margin:10px 0 0 0;">Bank Transfer, Opay, Palmpay, Kuda, USDT. For USD/GBP/EUR we accept Wise, PayPal F&F, and international wire. Message us on WhatsApp for details.</p>
-    </div>
-  </div>
-  
-  <div class="faq-item" style="padding:15px 0;">
-    <div onclick="toggleFaq(this)" style="display:flex; justify-content:space-between; align-items:center; cursor:pointer; font-weight:bold; font-size:16px;">
-      What is your minimum and maximum order? <span style="color:#4da3ff; font-size:20px;">+</span>
-    </div>
-    <div style="max-height:0; overflow:hidden; transition:max-height 0.3s ease; color:#ccc; font-size:14px; line-height:1.6; padding-top:0;">
-      <p style="margin:10px 0 0 0;">Minimum: $50 or ₦50,000. Maximum: $50,000 per transaction. For larger orders, contact us on WhatsApp for OTC rates.</p>
-    </div>
-  </div>
-</div>
-
-<script>
-function toggleFaq(element) {
-  const content = element.nextElementSibling;
-  const icon = element.querySelector('span');
-  
-  if (content.style.maxHeight && content.style.maxHeight !== '0px') {
-    content.style.maxHeight = '0px';
-    content.style.paddingTop = '0px';
-    icon.innerText = '+';
-  } else {
-    content.style.maxHeight = content.scrollHeight + 'px';
-    content.style.paddingTop = '10px';
-    icon.innerText = '−';
-  }
-</script>
-  <div style="background:#111; padding:20px; border-radius:12px; margin:20px;">
-    <h3 style="color:#4da3ff; margin:0 0 10px 0;">Order Instantly</h3>
-    <input id="clientName" placeholder="Your Name" 
-           style="padding:12px; width:85%; margin:5px 0; border:none; border-radius:8px; font-size:16px;">
-    <input id="buyAmount" type="number" placeholder="USD Amount" 
-           style="padding:12px; width:85%; margin:5px 0; border:none; border-radius:8px; font-size:16px;">
-    <button onclick="sendOrder()" 
-            style="background:#25D366; color:#fff; border:none; padding:15px; width:90%; border-radius:8px; font-size:16px; font-weight:bold; margin-top:10px; cursor:pointer;">
-      💬 Order on WhatsApp
-    </button>
-  </div>
-<!-- QR Code for Order Form -->
-<div id="qrSection" style="display:none; text-align:center; margin:20px 0;">
-  <canvas id="qrCanvas"></canvas>
-  <p id="qrAmount" style="margin-top:8px; font-weight:bold; color:#fff;"></p>
-</div>
-<script>
-function sendOrder(){
-  let name = document.getElementById('clientName').value;
-  let amount = document.getElementById('buyAmount').value;
-  let text = `Hi Digital Platform USA, I'm ${name}. I want to buy $${amount} worth of Bitcoin.`;
-  window.open(`https://wa.me/qr/LOQ7A26VJ2DFF1?text=${encodeURIComponent(text)}`, '_blank');
-}
-</script>
-<script>
-// === SETUP - MUST BE FIRST ===
+// === CONFIG ===
 let currentCoin = 'BTC';
-let COIN_RATES = {
-  BTC: {usd: 76271, gbp: 60200, eur: 70800, cad: 103500},
-  USDT: {usd: 1, gbp: 0.79, eur: 0.92, cad: 1.36},
-  ETH: {usd: 3400, gbp: 2680, eur: 3150, cad: 4620}
-};
-const SYMBOLS = {usd: '$', gbp: '£', eur: '€', cad: '$'};
 let timeLeft = 300;
 
-const currencySelect = document.getElementById('currencySelect');
-const currencyInput = document.getElementById('currencyInput');
+const COIN_RATES = {
+  BTC: {usd: 43250, gbp: 34200, eur: 40200},
+  USDT: {usd: 1, gbp: 0.79, eur: 0.93},
+  ETH: {usd: 2650, gbp: 2090, eur: 2460}
+};
+
+// === ELEMENTS ===
+const currencyInput = document.getElementById('usdInput');
 const btcOutput = document.getElementById('btcOutput');
 const rateText = document.getElementById('rateText');
 const expiryTimer = document.getElementById('expiryTimer');
+const currencySelect = document.getElementById('currencySelect');
+
+// === CORE CALCULATOR ===
+function updateCalc() {
+  const usd = parseFloat(currencyInput.value) || 0;
+  const currency = currencySelect.value;
+  const rate = COIN_RATES[currentCoin][currency];
+  const crypto = usd / rate;
+  
+  const symbols = {BTC: '₿', USDT: '₮', ETH: 'Ξ'};
+  btcOutput.textContent = `${symbols[currentCoin]}${crypto.toFixed(8)}`;
+  rateText.textContent = `1 ${currentCoin} = $${rate.toLocaleString()}`;
+}
 
 // === SWITCH COIN ===
 function switchCoin(coin) {
   currentCoin = coin;
-  document.getElementById('btnBTC').style.background = coin==='BTC'? '#4da3ff' : '#1a1a1a';
-  document.getElementById('btnBTC').style.color = coin==='BTC'? '#000' : '#fff';
-  document.getElementById('btnUSDT').style.background = coin==='USDT'? '#4da3ff' : '#1a1a1a';
-  document.getElementById('btnUSDT').style.color = coin==='USDT'? '#000' : '#fff';
-  document.getElementById('btnETH').style.background = coin==='ETH'? '#4da3ff' : '#1a1a1a';
-  document.getElementById('btnETH').style.color = coin==='ETH'? '#000' : '#fff';
+  
+  document.getElementById('btnBTC').className = coin === 'BTC' ? 'coin-btn active' : 'coin-btn';
+  document.getElementById('btnUSDT').className = coin === 'USDT' ? 'coin-btn active' : 'coin-btn';
+  document.getElementById('btnETH').className = coin === 'ETH' ? 'coin-btn active' : 'coin-btn';
+  
   updateCalc();
 }
 
 // === LIVE API RATES ===
 async function fetchLiveRates() {
   try {
-    const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,tether,ethereum&vs_currencies=usd,gbp,eur,cad');
+    const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,tether,ethereum&vs_currencies=usd,gbp,eur');
     const data = await res.json();
+    
     COIN_RATES.BTC = data.bitcoin;
     COIN_RATES.USDT = data.tether;
     COIN_RATES.ETH = data.ethereum;
+    
     timeLeft = 300;
     updateCalc();
+    console.log('Live rates loaded');
   } catch(e) {
     console.log('Using backup rates');
-    updateCalculator();
+    updateCalc();
   }
 }
-<script>
+
+// === TIMER ===
+function updateTimer() {
+  const mins = Math.floor(timeLeft / 60);
+  const secs = timeLeft % 60;
+  expiryTimer.textContent = `Rate expires in ${mins}:${secs.toString().padStart(2, '0')}`;
+  
+  if (timeLeft <= 0) {
+    fetchLiveRates();
+  } else {
+    timeLeft--;
+  }
+}
+
+// === INIT ===
+document.addEventListener('DOMContentLoaded', function() {
+  currencyInput.addEventListener('input', updateCalc);
+  currencySelect.addEventListener('change', updateCalc);
+  
+  updateCalc();
+  fetchLiveRates();
+  setInterval(updateTimer, 1000);
+});
+</script>
 </body>
 </html>
