@@ -253,34 +253,6 @@ async function fetchLiveRates() {
     updateCalculator();
   }
 }
-  
-// RATES - Update these manually
-const BTC_RATE = 43250;
-const BTC_ADDRESS = 'bc1q6n3femsfdl7td2jewccz4pwhfmaxcfx8x09z0q';
-
-// ONE function to rule them all
-function updateCalculator() {
-  const usdInput = document.querySelector('.calculator input[type="number"]');
-  const btcOutput = document.querySelector('.calculator div[style*="rgb(255"]');
-  
-  if (!usdInput || !btcOutput) {
-    console.log('Calculator elements not found');
-    return;
-  }
-  
-  const usd = parseFloat(usdInput.value) || 0;
-  const btc = usd / BTC_RATE;
-  btcOutput.textContent = `₿${btc.toFixed(8)}`;
-}
-
-// Hook it up once page loads
-document.addEventListener('DOMContentLoaded', function() {
-  const usdInput = document.querySelector('input[placeholder*="USD"]');
-  if (usdInput) {
-    usdInput.addEventListener('input', updateCalculator);
-    updateCalculator(); // Run once on load
-  }
-});
 <script>
 </body>
 </html>
