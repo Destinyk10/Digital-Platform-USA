@@ -34,6 +34,7 @@
 .trust-line { text-align: center; color: #8b92a8; font-size: 12px; margin-top: 20px; }
 .section-title { font-size: 18px; font-weight: 700; margin: 24px 0 12px 0; }
 .testimonial { background: #1e2329; border: 1px solid #2b3139; border-radius: 8px; padding: 16px; margin-bottom: 12px; }
+.stars { color: #f0b90b; font-size: 16px; margin-bottom: 8px; letter-spacing: 2px; }
 .testimonial-text { color: #eaecef; font-size: 14px; margin-bottom: 8px; font-style: italic; }
 .testimonial-name { color: #f0b90b; font-size: 13px; font-weight: 600; }
 .testimonial-role { color: #8b92a8; font-size: 12px; }
@@ -69,7 +70,8 @@
         <div class="input-row">
           <select class="currency-select" id="currencySelect">
             <option value="usd">USD</option>
-            <option value="ngn">NGN</option>
+            <option value="cad">CAD</option>
+            <option value="gbp">GBP</option>
           </select>
           <input type="number" class="amount-input" id="usdInput" placeholder="5000" value="5000">
         </div>
@@ -92,16 +94,19 @@
 
     <div class="section-title">What US Traders Say</div>
     <div class="testimonial">
+      <div class="stars">★★★★★</div>
       <p class="testimonial-text">"Got my BTC in 6 minutes. Used CashApp and they beat Coinbase rates by $200 on my $3k buy. Legit."</p>
       <div class="testimonial-name">Michael R.</div>
       <div class="testimonial-role">Miami, FL | $3,000 trade</div>
     </div>
     <div class="testimonial">
+      <div class="stars">★★★★★</div>
       <p class="testimonial-text">"No KYC hassle for my $1,500 ETH buy. Customer service answered my Telegram in 90 seconds. Using them again."</p>
       <div class="testimonial-name">Jessica T.</div>
       <div class="testimonial-role">Austin, TX | $1,500 trade</div>
     </div>
     <div class="testimonial">
+      <div class="stars">★★★★★</div>
       <p class="testimonial-text">"Zelle payment was instant and I had USDT in my wallet before I closed the app. Fastest P2P in the US."</p>
       <div class="testimonial-name">David K.</div>
       <div class="testimonial-role">New York, NY | $4,200 trade</div>
@@ -144,7 +149,7 @@
     let liveRates = { bitcoin: 0, ethereum: 0, tether: 1 };
     let currentCoin = "bitcoin";
     let currentCurrency = "usd";
-    let usdToNgn = 1650;
+    let exchangeRates = { usd: 1, cad: 1.36, gbp: 0.79 };
 
     const usdInput = document.getElementById('usdInput');
     const cryptoAmount = document.getElementById('cryptoAmount');
@@ -162,9 +167,10 @@
         liveRates.ethereum = data.ethereum.usd;
         liveRates.tether = data.tether.usd;
 
-        const ngnRes = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
-        const ngnData = await ngnRes.json();
-        usdToNgn = ngnData.rates.NGN || 1650;
+        const fxRes = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
+        const fxData = await fxRes.json();
+        exchangeRates.cad = fxData.rates.CAD || 1.36;
+        exchangeRates.gbp = fxData.rates.GBP || 0.79;
 
         updateCalculator();
       } catch (err) {
@@ -174,25 +180,20 @@
 
     function updateCalculator() {
       const amount = parseFloat(usdInput.value) || 0;
-      const coinRate = liveRates[currentCoin];
-      let usdAmount = amount;
+      const coinRateUSD = liveRates[currentCoin];
+      const fxRate = exchangeRates[currentCurrency];
+      const usdAmount = currentCurrency === 'usd'? amount : amount / fxRate;
+      const cryptoValue = usdAmount / coinRateUSD;
 
-      if (currentCurrency === 'ngn') {
-        usdAmount = amount / usdToNgn;
-      }
-
-      const cryptoValue = usdAmount / coinRate;
       let symbol = '₿';
       if (currentCoin === 'ethereum') symbol = 'Ξ';
       if (currentCoin === 'tether') symbol = '₮';
 
       cryptoAmount.textContent = symbol + cryptoValue.toFixed(8);
 
-      if (currentCurrency === 'usd') {
-        rateInfo.textContent = `1 ${currentCoin.toUpperCase()} = $${coinRate.toLocaleString()}`;
-      } else {
-        rateInfo.textContent = `1 ${currentCoin.toUpperCase()} = ₦${(coinRate * usdToNgn).toLocaleString()}`;
-      }
+      const currSymbol = currentCurrency === 'usd'? '$' : currentCurrency === 'cad'? 'C$' : '£';
+      const displayRate = (coinRateUSD * fxRate).toLocaleString(undefined, {maximumFractionDigits: 2});
+      rateInfo.textContent = `1 ${currentCoin.toUpperCase()} = ${currSymbol}${displayRate}`;
     }
 
     document.querySelectorAll('.coin-tab').forEach(tab => {
@@ -206,7 +207,7 @@
 
     currencySelect.addEventListener('change', (e) => {
       currentCurrency = e.target.value;
-      usdInput.placeholder = currentCurrency === 'usd'? '5000' : '8000000';
+      usdInput.placeholder = currentCurrency === 'usd'? '5000' : currentCurrency === 'cad'? '6800' : '4000';
       updateCalculator();
     });
 
