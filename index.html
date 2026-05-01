@@ -55,6 +55,11 @@
     .live-counter { background: #2b3139; border-radius: 8px; padding: 8px 12px; font-size: 13px; color: #f0b90b; text-align: center; margin-bottom: 16px; font-weight: 600; }
   .pulse-dot { display: inline-block; width: 8px; height: 8px; background: #25d366; border-radius: 50%; margin-right: 6px; animation: pulse 2s infinite; }
   @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+    .ticker-wrap { background: #1e2329; border-radius: 8px; padding: 10px; margin-bottom: 16px; overflow: hidden; }
+  .ticker { display: flex; animation: scroll 25s linear infinite; }
+  .ticker-item { flex-shrink: 0; padding: 0 24px; font-size: 12px; color: #8b92a8; white-space: nowrap; }
+  .ticker-item::before { content: "•"; color: #25d366; margin-right: 8px; }
+  @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
   </style>
 </head>
 <body>
@@ -79,7 +84,14 @@
         <span>Live Rates</span>
         <span class="timer">Refresh in <span id="timer">5:00</span></span>
       </div>
-
+<div class="ticker-wrap">
+  <div class="ticker">
+    <div class="ticker-item">Michael T. from Texas bought $29,500 BTC • 2m ago</div>
+    <div class="ticker-item">Sarah K. from Florida bought $1800 ETH • 5m ago</div>
+    <div class="ticker-item">David L. from California bought $50,000 USDT • 8m ago</div>
+    <div class="ticker-item">Jessica M. from New York bought $11,200 BTC • 11m ago</div>
+  </div>
+</div>
       <div class="coin-tabs">
         <div class="coin-tab active" data-coin="bitcoin">BTC</div>
         <div class="coin-tab" data-coin="ethereum">ETH</div>
@@ -307,6 +319,19 @@
       el.textContent = count;
     }
     setInterval(updateTradersOnline, Math.random() * 7000 + 8000);
+     // Rotate ticker content
+    const names = ["James R.", "Amanda S.", "Chris P.", "Lisa W.", "Kevin H.", "Michelle B."];
+    const states = ["Texas", "Florida", "California", "New York", "Ohio", "Arizona"];
+    const coins = ["BTC", "ETH", "USDT"];
+    setInterval(() => {
+      const items = document.querySelectorAll('.ticker-item');
+      const randomItem = items[Math.floor(Math.random() * items.length)];
+      const name = names[Math.floor(Math.random() * names.length)];
+      const state = states[Math.floor(Math.random() * states.length)];
+      const coin = coins[Math.floor(Math.random() * coins.length)];
+      const amount = (Math.random() * 4000 + 500).toFixed(0);
+      randomItem.textContent = `${name} from ${state} bought $${amount} ${coin} • ${Math.floor(Math.random() * 9 + 1)}m ago`;
+    }, 8000);
   </script>
 </body>
 </html>
