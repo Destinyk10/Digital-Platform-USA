@@ -7,38 +7,42 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0b0e11; color: #eaecef; line-height: 1.6; }
-   .container { max-width: 480px; margin: 0 auto; padding: 20px 16px; }
-   .header { text-align: center; margin-bottom: 24px; }
-   .logo { font-size: 24px; font-weight: 800; color: #f0b90b; margin-bottom: 8px; }
-   .subtitle { color: #8b92a8; font-size: 14px; }
-   .card { background: #1e2329; border: 1px solid #2b3139; border-radius: 12px; padding: 20px; margin-bottom: 16px; }
-   .rate-timer { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; font-size: 13px; color: #8b92a8; }
-   .timer { color: #f0b90b; font-weight: 600; }
-   .coin-tabs { display: flex; gap: 8px; margin-bottom: 20px; }
-   .coin-tab { flex: 1; padding: 10px; background: #2b3139; border: 1px solid #2b3139; border-radius: 8px; color: #8b92a8; text-align: center; cursor: pointer; font-weight: 600; font-size: 14px; transition: all 0.2s; }
-   .coin-tab.active { background: #f0b90b; color: #0b0e11; border-color: #f0b90b; }
-   .input-group { margin-bottom: 16px; }
-   .input-label { display: block; font-size: 13px; color: #8b92a8; margin-bottom: 8px; }
-   .input-row { display: flex; gap: 8px; }
-   .currency-select { padding: 12px; background: #2b3139; border: 1px solid #2b3139; border-radius: 8px; color: #eaecef; font-weight: 600; }
-   .amount-input { flex: 1; padding: 12px; background: #2b3139; border: 1px solid #2b3139; border-radius: 8px; color: #eaecef; font-size: 16px; }
-   .amount-input:focus { outline: none; border-color: #f0b90b; }
-   .result-box { background: #2b3139; border-radius: 8px; padding: 16px; margin: 16px 0; text-align: center; }
-   .result-label { font-size: 13px; color: #8b92a8; margin-bottom: 4px; }
-   .result-amount { font-size: 24px; font-weight: 700; color: #f0b90b; }
-   .rate-info { font-size: 12px; color: #8b92a8; text-align: center; margin-bottom: 16px; }
-   .buy-btn { width: 100%; padding: 16px; background: #25d366; border: none; border-radius: 8px; color: #fff; font-size: 16px; font-weight: 700; cursor: pointer; margin-bottom: 8px; transition: all 0.2s; }
-   .buy-btn:hover { background: #1fa855; transform: translateY(-1px); }
-   .telegram-btn { width: 100%; padding: 16px; background: #0088cc; border: none; border-radius: 8px; color: #fff; font-size: 16px; font-weight: 700; cursor: pointer; margin: 8px 0 16px 0; transition: all 0.2s; }
-   .telegram-btn:hover { background: #0077b3; transform: translateY(-1px); }
-   .trust-line { text-align: center; color: #8b92a8; font-size: 12px; margin-top: 20px; }
-   .faq-title { font-size: 18px; font-weight: 700; margin: 24px 0 12px 0; }
-   .faq-item { background: #1e2329; border: 1px solid #2b3139; border-radius: 8px; margin-bottom: 8px; overflow: hidden; }
-   .faq-question { padding: 16px; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-   .faq-answer { padding: 0 16px; max-height: 0; overflow: hidden; transition: all 0.3s; color: #8b92a8; font-size: 14px; }
-   .faq-item.active.faq-answer { padding: 0 16px 16px 16px; max-height: 200px; }
-   .faq-arrow { transition: transform 0.3s; }
-   .faq-item.active.faq-arrow { transform: rotate(180deg); }
+  .container { max-width: 480px; margin: 0 auto; padding: 20px 16px; }
+  .header { text-align: center; margin-bottom: 24px; }
+  .logo { font-size: 24px; font-weight: 800; color: #f0b90b; margin-bottom: 8px; }
+  .subtitle { color: #8b92a8; font-size: 14px; }
+  .card { background: #1e2329; border: 1px solid #2b3139; border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+  .rate-timer { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; font-size: 13px; color: #8b92a8; }
+  .timer { color: #f0b90b; font-weight: 600; }
+  .coin-tabs { display: flex; gap: 8px; margin-bottom: 20px; }
+  .coin-tab { flex: 1; padding: 10px; background: #2b3139; border: 1px solid #2b3139; border-radius: 8px; color: #8b92a8; text-align: center; cursor: pointer; font-weight: 600; font-size: 14px; transition: all 0.2s; }
+  .coin-tab.active { background: #f0b90b; color: #0b0e11; border-color: #f0b90b; }
+  .input-group { margin-bottom: 16px; }
+  .input-label { display: block; font-size: 13px; color: #8b92a8; margin-bottom: 8px; }
+  .input-row { display: flex; gap: 8px; }
+  .currency-select { padding: 12px; background: #2b3139; border: 1px solid #2b3139; border-radius: 8px; color: #eaecef; font-weight: 600; }
+  .amount-input { flex: 1; padding: 12px; background: #2b3139; border: 1px solid #2b3139; border-radius: 8px; color: #eaecef; font-size: 16px; }
+  .amount-input:focus { outline: none; border-color: #f0b90b; }
+  .result-box { background: #2b3139; border-radius: 8px; padding: 16px; margin: 16px 0; text-align: center; }
+  .result-label { font-size: 13px; color: #8b92a8; margin-bottom: 4px; }
+  .result-amount { font-size: 24px; font-weight: 700; color: #f0b90b; }
+  .rate-info { font-size: 12px; color: #8b92a8; text-align: center; margin-bottom: 16px; }
+  .buy-btn { width: 100%; padding: 16px; background: #25d366; border: none; border-radius: 8px; color: #fff; font-size: 16px; font-weight: 700; cursor: pointer; margin-bottom: 8px; transition: all 0.2s; }
+  .buy-btn:hover { background: #1fa855; transform: translateY(-1px); }
+  .telegram-btn { width: 100%; padding: 16px; background: #0088cc; border: none; border-radius: 8px; color: #fff; font-size: 16px; font-weight: 700; cursor: pointer; margin: 8px 0 16px 0; transition: all 0.2s; }
+  .telegram-btn:hover { background: #0077b3; transform: translateY(-1px); }
+  .trust-line { text-align: center; color: #8b92a8; font-size: 12px; margin-top: 20px; }
+  .section-title { font-size: 18px; font-weight: 700; margin: 24px 0 12px 0; }
+  .testimonial { background: #1e2329; border: 1px solid #2b3139; border-radius: 8px; padding: 16px; margin-bottom: 12px; }
+  .testimonial-text { color: #eaecef; font-size: 14px; margin-bottom: 8px; font-style: italic; }
+  .testimonial-name { color: #f0b90b; font-size: 13px; font-weight: 600; }
+  .testimonial-role { color: #8b92a8; font-size: 12px; }
+  .faq-item { background: #1e2329; border: 1px solid #2b3139; border-radius: 8px; margin-bottom: 8px; overflow: hidden; }
+  .faq-question { padding: 16px; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+  .faq-answer { padding: 0 16px; max-height: 0; overflow: hidden; transition: all 0.3s; color: #8b92a8; font-size: 14px; }
+  .faq-item.active.faq-answer { padding: 0 16px 16px 16px; max-height: 200px; }
+  .faq-arrow { transition: transform 0.3s; }
+  .faq-item.active.faq-arrow { transform: rotate(180deg); }
   </style>
 </head>
 <body>
@@ -86,7 +90,24 @@
       </p>
     </div>
 
-    <div class="faq-title">FAQ</div>
+    <div class="section-title">What Traders Say</div>
+    <div class="testimonial">
+      <p class="testimonial-text">"Fastest BTC delivery I've used. Got my coins in 8 minutes flat. Rate was better than Binance P2P too."</p>
+      <div class="testimonial-name">James O.</div>
+      <div class="testimonial-role">Lagos, Nigeria | $2,400 trade</div>
+    </div>
+    <div class="testimonial">
+      <p class="testimonial-text">"I was scared of getting scammed. But Digital Platform sent proof before I paid. Legit vendor, 10/10."</p>
+      <div class="testimonial-name">Sarah M.</div>
+      <div class="testimonial-role">Houston, TX | $800 trade</div>
+    </div>
+    <div class="testimonial">
+      <p class="testimonial-text">"Used them 6 times now. No KYC stress for small amounts. Customer service replies on Telegram in 2 mins."</p>
+      <div class="testimonial-name">Chinedu K.</div>
+      <div class="testimonial-role">Abuja, Nigeria | $5,000+ total</div>
+    </div>
+
+    <div class="section-title">FAQ</div>
     <div class="faq-item">
       <div class="faq-question">
         How fast do I get my crypto?
